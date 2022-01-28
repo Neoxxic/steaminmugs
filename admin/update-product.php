@@ -87,7 +87,7 @@ include('../admin/static/header.php');
                     <form class="form-horizontal mt-4" action="" enctype="multipart/form-data" method="POST">
                         <div class="form-group">
                             <label>Title:</label>
-                            <input type="text" class="form-control" placeholder="Category Title" name="title" value="<?php echo $title;?>">
+                            <input type="text" class="form-control" placeholder="Product Title" name="title" value="<?php echo $title;?>">
                         </div>
                         <div class="form-group">
                                     <label>Description:</label>

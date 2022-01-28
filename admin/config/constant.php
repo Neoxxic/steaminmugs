@@ -2,7 +2,7 @@
 
 session_start();
 
-
+//DATABASE CONFIG
 $siteurl = 'http://localhost:8080/steaminmugs/';
 $servername = 'localhost';
 $username = 'root';
@@ -13,11 +13,13 @@ $conn = mysqli_connect($servername, $username, $password);
 $db_select = mysqli_select_db($conn, $dbname);
 
 
+// FUNCTION
 function Redirect($url, $statusCode = 303)
         {
             header('Location: ' . $url, true, $statusCode);
             die();
         }
+
 
     //ADD ADMIN
     if(isset($_POST['submit'])) {

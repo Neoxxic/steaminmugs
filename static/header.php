@@ -1,3 +1,6 @@
+<?php
+    include('config/constant.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -38,11 +41,11 @@
 	      </button>
 	      <div class="collapse navbar-collapse" id="ftco-nav">
 	        <ul class="navbar-nav ml-auto">
-	          <li class="nav-item active"><a href="index.php" class="nav-link">Home</a></li>
-	          <li class="nav-item"><a href="menu.php" class="nav-link">Menu</a></li>
-	          <li class="nav-item"><a href="services.php" class="nav-link">Services</a></li>
-	          <li class="nav-item"><a href="blog.php" class="nav-link">Blog</a></li>
-	          <li class="nav-item"><a href="about.php" class="nav-link">About</a></li>
+	          <li class="nav-item <?php active('');?>"><a href="<?php echo $siteurl; ?>" class="nav-link">Home</a></li>
+	          <li class="nav-item <?php active('menu.php');?>"><a href="<?php echo $siteurl; ?>menu.php" class="nav-link">Menu</a></li>
+	          <li class="nav-item <?php active('services.php');?>"><a href="<?php echo $siteurl; ?>services.php" class="nav-link">Services</a></li>
+	          <li class="nav-item <?php active('blog.php');?>"><a href="<?php echo $siteurl; ?>blog.php" class="nav-link">Blog</a></li>
+	          <li class="nav-item <?php active('about.php');?>"><a href="<?php echo $siteurl; ?>about.php" class="nav-link">About</a></li>
 	          <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="room.html" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Shop</a>
               <div class="dropdown-menu" aria-labelledby="dropdown04">
