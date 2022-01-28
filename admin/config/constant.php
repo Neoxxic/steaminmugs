@@ -19,6 +19,7 @@ function Redirect($url, $statusCode = 303)
             die();
         }
 
+    //ADD ADMIN
     if(isset($_POST['submit'])) {
 
         $full_name = $_POST['full_name'];
@@ -44,7 +45,7 @@ function Redirect($url, $statusCode = 303)
                 }
     }
 
-    
+    //UPDATE ADMIN
     if(isset($_POST['update'])) {
 
         $id = $_POST['id'];
@@ -75,7 +76,7 @@ function Redirect($url, $statusCode = 303)
 
     }
 
-
+    //CHANGE PASSWORD ADMIN
     if(isset($_POST['change'])){
 
         $id = $_POST['id'];
@@ -135,6 +136,7 @@ function Redirect($url, $statusCode = 303)
 
     }
 
+    //ADD CATEGORY
     if(isset($_POST['add-categ'])){
         
         $title = $_POST['title'];
@@ -225,7 +227,7 @@ function Redirect($url, $statusCode = 303)
         
     }
 
-    
+    //UPDATE CATEGORY
     if(isset($_POST['update-categ'])){
 
         $id = $_POST['id'];
@@ -304,5 +306,180 @@ function Redirect($url, $statusCode = 303)
             Redirect($siteurl.'admin/update-category.php');
 
         }
+
+    }
+
+    //ADD PRODUCT
+    if(isset($_POST['add-prod'])){
+    
+        $title = $_POST['title'];
+        $description = $_POST['description'];
+        $price = $_POST['price'];
+        $category = $_POST['category'];
+
+        if(isset($_POST['featured'])){
+
+            $featured = $_POST['featured'];
+
+        } else{
+            
+            $featured = "No";
+            
+        }
+
+        if(isset($_POST['active'])){
+
+            $active = $_POST['active'];
+
+        } else {
+
+            $active = "No";
+            
+        }
+
+        if(isset($_FILES['upload']['name'])){
+
+            $image_name = $_FILES['upload']['name'];
+            
+            if($image_name !=""){
+                
+                $ext = pathinfo($image_name, PATHINFO_EXTENSION);
+    
+                $image_name = "Product-Name_".time().'.'.$ext;
+                
+                $source_path = $_FILES['upload']['tmp_name'];
+                $destination_path = "upload/product/". $image_name;
+    
+                $uploadImage = copy($source_path, $destination_path);
+                
+                if($uploadImage==false){
+    
+                    $_SESSION['upload-prod'] = "Failed to Upload Image";
+                    header('Location: ' . $siteurl.'admin/add-product.php');
+                    die();
+                    
+                }
+            }
+           
+
+        } else {
+
+            $image_name = "";
+
+        }
+
+        $sql = "INSERT INTO tbl_food SET
+                title = '$title',
+                description = '$description',
+                price = $price,
+                image_name = '$image_name',
+                category_id = '$category',
+                featured = '$featured',
+                active = '$active'
+        ";
+
+        $res = mysqli_query($conn, $sql);
+
+        if($res==true){
+
+            $_SESSION['add-product'] = "Product Added Successfully";
+            Redirect($siteurl.'admin/manage-product.php');
+
+        } else {
+
+            $_SESSION['add-product'] = "Failed to add product";
+            Redirect($siteurl.'admin/add-product.php');
+
+        }
+
+    }
+
+    //UPDATE PRODUCT
+    if(isset($_POST['update-prod'])){
+
+        $id = $_POST['id'];
+        $title = $_POST['title'];
+        $description = $_POST['description'];
+        $price = $_POST['price'];
+        $category = $_POST['category'];
+        $current_image = $_POST['current_image'];
+        $featured = $_POST['featured'];
+        $active = $_POST['active'];
+        
+
+        if(isset($_FILES['upload']['name'])){
+
+            $image_name = $_FILES['upload']['name'];
+            
+            if($image_name != ""){
+
+                $ext = pathinfo($image_name, PATHINFO_EXTENSION);
+    
+                $image_name = "Product-Name_".time().'.'.$ext;
+                
+                $source_path = $_FILES['upload']['tmp_name'];
+                $destination_path = "upload/product/". $image_name;
+    
+                $uploadImage = copy($source_path, $destination_path);
+                
+                if($uploadImage==false){
+                    $_SESSION['upload'] = "Failed to Upload Image";
+                    header('Location: ' . $siteurl.'admin/manage-product.php');
+                    die();
+                }
+
+                if($current_image != ""){
+
+                    $remove_path = "upload/product/".$current_image;
+                    $remove = unlink($remove_path);
+                
+                    if($remove == false){
+
+                        $_SESSION['f-remove-img'] = "Failed to remove current images";
+                        header($siteurl.'admin/manage-product.php');
+                        die();
+                    }
+
+                }
+
+            } else {
+
+                $image_name = $current_image;
+
+            }
+
+        } else {
+
+            $image_name = $current_image;
+
+        }
+
+        
+        $sql = "UPDATE tbl_food SET
+                title = '$title',
+                description = '$description',
+                price = $price,
+                image_name = '$image_name',
+                category_id = '$category', 
+                featured = '$featured',
+                active = '$active'
+                WHERE id=$id
+        ";
+
+        $res = mysqli_query($conn, $sql);
+
+        if($res==true){
+
+            $_SESSION['update-prod'] = "Product Updated Successfully";
+            Redirect($siteurl.'admin/manage-product.php');
+
+        } else {
+
+            $_SESSION['update-prod'] = "Failed to Update";
+            Redirect($siteurl.'admin/update-product.php?id='.$id);
+
+        }
+
+
 
     }

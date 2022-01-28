@@ -29,14 +29,14 @@
         if($res==TRUE){
 
             $_SESSION['delete-categ'] = "<div class='alert alert-success'>
-                                        Admin Deleted Successfully
+                                        Category Deleted Successfully
                                     </div>";
             Redirect($siteurl.'admin/manage-category.php');
             
         }else{
     
             $_SESSION['delete-categ'] = "<div class='alert alert-danger'> 
-                                        Failed to Delete Admin. Please Try Again.
+                                        Failed to Delete Category. Please Try Again.
                                     </div>";
             Redirect($siteurl.'admin/manage-category.php');
     

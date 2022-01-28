@@ -12,7 +12,7 @@ include('../admin/static/header.php');
     <div class="page-breadcrumb">
         <div class="row">
             <div class="col-5 align-self-center">
-                <h4 class="page-title">Add Product</h4>
+                <h4 class="page-title">Update Product</h4>
             </div>
             <div class="col-7 align-self-center">
                 <div class="d-flex align-items-center justify-content-end">
@@ -22,7 +22,7 @@ include('../admin/static/header.php');
                                 <a href="#">Home</a>
                             </li>
                             <li class="breadcrumb-item" aria-current="page">Manage Product</li>
-                            <li class="breadcrumb-item active" aria-current="page">Add Product</li>
+                            <li class="breadcrumb-item active" aria-current="page">Update Product</li>
                         </ol>
                     </nav>
                 </div>
@@ -45,46 +45,75 @@ include('../admin/static/header.php');
                     <h4 class="card-title">Product Form</h4>
                     <h5 class="card-subtitle">Fill up the details below</h5>
                     <?php
-                            if (isset($_SESSION['add-product'])) {
-                                ?>
-                                <div class="alert alert-danger">
-                                    <?php echo $_SESSION['add-product'];?>
-                                </div>
-                                <?php
-                                unset($_SESSION['add-product']);
+                         
+                        if(isset($_GET['id'])){
+
+                            $id = $_GET['id'];
+                            $sql="SELECT * FROM tbl_food WHERE id=$id";
+                    
+                            $res = mysqli_query($conn, $sql);
+                            $count = mysqli_num_rows($res);
+                    
+                            if($count==1){
+                    
+                                $row = mysqli_fetch_assoc($res);
+                                $title = $row['title'];
+                                $description = $row['description'];
+                                $price = $row['price'];
+                                $current_image = $row['image_name'];
+                                $current_category = $row['category_id'];
+                                $featured = $row['featured'];
+                                $active = $row['active'];
+                    
+                            } else {
+                    
+                                $_SESSION['no-category-found'] = "Category not Found";
+                                Redirect($siteurl.'admin/manage-product.php');
+                    
                             }
-                            if (isset($_SESSION['upload-prod'])) {
-                                ?>
-                                <div class="alert alert-danger">
-                                    <?php echo $_SESSION['upload-prod'];?>
-                                </div>
-                                <?php
-                                unset($_SESSION['upload-prod']);
-                            }
-                            if (isset($_SESSION['error-add-product'])) {
-                                ?>
-                                <div class="alert alert-danger">
-                                    <?php echo $_SESSION['error-add-product'];?>
-                                </div>
-                                <?php
-                                unset($_SESSION['error-add-product']);
-                            }
+                            
+                        }
+
+                        if (isset($_SESSION['update-prod'])) {
+                            ?>
+                            <div class="alert alert-danger">
+                                <?php echo $_SESSION['update-prod'];?>
+                            </div>
+                            <?php
+                            unset($_SESSION['update-prod']);
+                        }
+                  
                     ?>
                     <form class="form-horizontal mt-4" action="" enctype="multipart/form-data" method="POST">
                         <div class="form-group">
                             <label>Title:</label>
-                            <input type="text" class="form-control" placeholder="Category Title" name="title">
+                            <input type="text" class="form-control" placeholder="Category Title" name="title" value="<?php echo $title;?>">
                         </div>
                         <div class="form-group">
                                     <label>Description:</label>
-                                    <textarea name="description" class="form-control" rows="5"></textarea>
+                                    <textarea name="description" class="form-control" rows="5" ><?php echo $description;?></textarea>
                         </div>
                         <div class="form-group">
                                     <label>Price:</label>
-                                    <input name="price" class="form-control col-md-2 col-sm-3" type="number" name="price">
+                                    <input name="price" class="form-control col-md-2 col-sm-3" type="number" name="price" value="<?php echo $price;?>">
                         </div>
                         <div class="form-group">
-                                    <label>Select Image:</label>
+                                    <label>Current Image:</label>
+                                    <?php 
+                                        if($current_image!= ""){
+                                            
+                                            ?>
+                                            <img src="<?php echo $siteurl; ?>admin/upload/product/<?php echo $current_image?>" class="img-thumbnail" width="100">
+                                            <?php
+
+
+                                        } else {
+                                            echo "<div class='message-error'>Image not found</div>";
+                                        }
+                                    ?>
+                        </div>
+                        <div class="form-group">
+                                    <label>New Image:</label>
                                     <input type="file" name="upload" class="form-control">
                         </div>
                         <div class="form-group">
@@ -92,20 +121,20 @@ include('../admin/static/header.php');
                                     <select class="form-control" name="category">
                                         <?php 
                                         
-                                            $sql = "SELECT * FROM tbl_categories WHERE active='Yes'";
-                                            $res = mysqli_query($conn, $sql);
+                                            $sql2 = "SELECT * FROM tbl_categories WHERE active='Yes'";
+                                            $res2 = mysqli_query($conn, $sql2);
 
-                                            $count = mysqli_num_rows($res);
+                                            $count2 = mysqli_num_rows($res2);
 
-                                            if($count > 0){
+                                            if($count2 > 0){
 
-                                                while($row=mysqli_fetch_assoc($res)){
+                                                while($row2=mysqli_fetch_assoc($res2)){
 
-                                                    $id = $row['id'];
-                                                    $title = $row['title'];
+                                                    $category_id = $row2['id'];
+                                                    $category_title = $row2['title'];
                                                     ?>
 
-                                                    <option value="<?php echo $id;?>"><?php echo $title;?></option>
+                                                    <option <?php if($current_category==$category_id){ echo "selected";}?> value="<?php echo $category_id;?>"><?php echo $category_title;?></option>
 
                                                     <?php
 
@@ -129,13 +158,13 @@ include('../admin/static/header.php');
                             <label>Featured:</label>
                             <div class="col-sm-1">
                                 <div class="form-check">
-                                    <input type="radio"  name="featured" value="Yes" class="form-check-input">
+                                    <input <?php if($featured == "Yes"){echo "checked";} ?> type="radio"  name="featured" value="Yes" class="form-check-input">
                                     <label class="form-check-label mb-0" >Yes</label>
                                 </div>
                             </div>
                             <div class="col-sm-1">
                                 <div class="form-check">
-                                    <input type="radio"  name="featured" value="No" class="form-check-input">
+                                    <input <?php if($featured == "No"){echo "checked";} ?> type="radio"  name="featured" value="No" class="form-check-input">
                                     <label class="form-check-label mb-0">No</label>
                                 </div>
                             </div>
@@ -144,19 +173,21 @@ include('../admin/static/header.php');
                             <label>Active:</label>
                             <div class="col-sm-1">
                                 <div class="form-check">
-                                    <input type="radio"  name="active" value="Yes" class="form-check-input">
+                                    <input <?php if($active == "Yes"){echo "checked";} ?> type="radio"  name="active" value="Yes" class="form-check-input">
                                     <label class="form-check-label mb-0" >Yes</label>
                                 </div>
                             </div>
                             <div class="col-sm-1">
                                 <div class="form-check">
-                                    <input type="radio" name="active" value="No" class="form-check-input">
+                                    <input <?php if($active == "No"){echo "checked";} ?> type="radio" name="active" value="No" class="form-check-input">
                                     <label class="form-check-label mb-0">No</label>
                                 </div>
                             </div>
                         </div>
                         <div>
-                            <input type="submit" class="btn btn-success text-white mdi mdi-account-plus" name="add-prod" value="Add Product">
+                        <input type="hidden" name="current_image" value="<?php echo $current_image; ?>">
+                            <input type="hidden" name="id" value="<?php echo $id; ?>">
+                            <input type="submit" class="btn btn-success text-white mdi mdi-account-plus" name="update-prod" value="Update Product">
                         </div>
                     </form>
                 </div>

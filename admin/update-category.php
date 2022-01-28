@@ -64,11 +64,21 @@ include('../admin/static/header.php');
                             } else {
                     
                                 $_SESSION['no-category-found'] = "Category not Found";
-                                Redirect($siteurl.'admin/update-category.php');
+                                Redirect($siteurl.'admin/manage-category.php');
                     
                             }
                             
                         }
+
+                        if (isset($_SESSION['update-categ'])) {
+                            ?>
+                            <div class="alert alert-danger">
+                                <?php echo $_SESSION['update-categ'];?>
+                            </div>
+                            <?php
+                            unset($_SESSION['update-categ']);
+                        }
+                        
                     ?>
                     <form class="form-horizontal mt-4" action="" enctype="multipart/form-data" method="POST">
                         <div class="form-group">

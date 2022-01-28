@@ -116,7 +116,7 @@
 
                                         } else {
                                             
-
+                                            echo "<tr><td class='error'> Category not added yet. </td></tr>";
 
                                         }
 
@@ -145,7 +145,7 @@
                 }
                 if (isset($_SESSION['no-category-found'])) {
                     ?>
-                    <div class="alert alert-success">
+                    <div class="alert alert-danger">
                         <?php echo $_SESSION['no-category-found'];?>
                     </div>
                     <?php
@@ -161,7 +161,7 @@
                 }
                 if (isset($_SESSION['f-remove-img'])) {
                     ?>
-                    <div class="alert alert-success">
+                    <div class="alert alert-danger">
                         <?php echo $_SESSION['f-remove-img'];?>
                     </div>
                     <?php
