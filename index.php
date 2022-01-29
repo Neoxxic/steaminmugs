@@ -72,31 +72,47 @@ include_once "static/efq.php"
 					<span class="subheading">Discover</span>
 					<h2 class="mb-4">Our Menu</h2>
 					<p class="mb-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
-					<p><a href="#" class="btn btn-primary btn-outline-primary px-4 py-3">View Full Menu</a></p>
+					<p><a href="<?php echo $siteurl . 'menu.php' ?>" class="btn btn-primary btn-outline-primary px-4 py-3">View Full Menu</a></p>
 				</div>
 			</div>
 			<div class="col-md-6">
 				<div class="row">
-					<div class="col-md-6">
-						<div class="menu-entry">
-							<a href="#" class="img" style="background-image: url(images/menu-1.jpg);"></a>
-						</div>
-					</div>
-					<div class="col-md-6">
-						<div class="menu-entry mt-lg-4">
-							<a href="#" class="img" style="background-image: url(images/menu-2.jpg);"></a>
-						</div>
-					</div>
-					<div class="col-md-6">
-						<div class="menu-entry">
-							<a href="#" class="img" style="background-image: url(images/menu-3.jpg);"></a>
-						</div>
-					</div>
-					<div class="col-md-6">
-						<div class="menu-entry mt-lg-4">
-							<a href="#" class="img" style="background-image: url(images/menu-4.jpg);"></a>
-						</div>
-					</div>
+					<?php
+					$sql_categories = "SELECT * FROM tbl_categories";
+					$res_categories = mysqli_query($conn, $sql_categories);
+					$count_categories = mysqli_num_rows($res_categories);
+
+					if ($count_categories > 0) {
+						while ($row_categ = mysqli_fetch_assoc($res_categories)) {
+
+							$categories_title = $row_categ['title'];
+							$categories_image = $row_categ['image_name'];
+							$categories_featured = $row_categ['featured'];
+							$categories_active = $row_categ['active'];
+
+							if ($categories_featured == "Yes" && $categories_active == "Yes") {
+					?>
+								<div class="col-md-6">
+									<div class="menu-entry">
+										<?php
+										if ($categories_image == "") {
+											echo "<div class'error'>Image not available</div>";
+										} else {
+										?>
+											<a href="#" class="img" style="background-image: url(<?php echo $siteurl . 'admin/upload/category/' . $categories_image; ?>);"></a>
+										<?php
+										}
+										?>
+									</div>
+								</div>
+					<?php
+							} else {
+							}
+						}
+					} else {
+					}
+
+					?>
 				</div>
 			</div>
 		</div>
@@ -161,50 +177,79 @@ include_once "static/efq.php"
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-3">
-				<div class="menu-entry">
-					<a href="#" class="img" style="background-image: url(images/menu-1.jpg);"></a>
-					<div class="text text-center pt-4">
-						<h3><a href="#">Coffee Capuccino</a></h3>
-						<p>A small river named Duden flows by their place and supplies</p>
-						<p class="price"><span>$5.90</span></p>
-						<p><a href="#" class="btn btn-primary btn-outline-primary">Add to Cart</a></p>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-3">
-				<div class="menu-entry">
-					<a href="#" class="img" style="background-image: url(images/menu-2.jpg);"></a>
-					<div class="text text-center pt-4">
-						<h3><a href="#">Coffee Capuccino</a></h3>
-						<p>A small river named Duden flows by their place and supplies</p>
-						<p class="price"><span>$5.90</span></p>
-						<p><a href="#" class="btn btn-primary btn-outline-primary">Add to Cart</a></p>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-3">
-				<div class="menu-entry">
-					<a href="#" class="img" style="background-image: url(images/menu-3.jpg);"></a>
-					<div class="text text-center pt-4">
-						<h3><a href="#">Coffee Capuccino</a></h3>
-						<p>A small river named Duden flows by their place and supplies</p>
-						<p class="price"><span>$5.90</span></p>
-						<p><a href="#" class="btn btn-primary btn-outline-primary">Add to Cart</a></p>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-3">
-				<div class="menu-entry">
-					<a href="#" class="img" style="background-image: url(images/menu-4.jpg);"></a>
-					<div class="text text-center pt-4">
-						<h3><a href="#">Coffee Capuccino</a></h3>
-						<p>A small river named Duden flows by their place and supplies</p>
-						<p class="price"><span>$5.90</span></p>
-						<p><a href="#" class="btn btn-primary btn-outline-primary">Add to Cart</a></p>
-					</div>
-				</div>
-			</div>
+			<?php
+			$sql_coffee = "SELECT * FROM tbl_categories";
+			$res_coffee = mysqli_query($conn, $sql_coffee);
+			$count_coffee = mysqli_num_rows($res_coffee);
+
+			if ($count_coffee > 0) {
+
+				while ($row_coffee = mysqli_fetch_assoc($res_coffee)) {
+
+					$category_coffee_title = $row_coffee['title'];
+
+					if ($category_coffee_title == "Coffee") {
+
+						$category_coffee_id = $row_coffee['id'];
+
+						$sql_coffee_prod = "SELECT * FROM tbl_food WHERE category_id=$category_coffee_id";
+						$res_coffee_prod = mysqli_query($conn, $sql_coffee_prod);
+						$count_coffee_prod = mysqli_num_rows($res_coffee_prod);
+						$num3 = 0;
+
+						if ($count_coffee_prod > 0) {
+
+							while ($row_coffee_prod = mysqli_fetch_assoc($res_coffee_prod)) {
+								$coffee = $row_coffee_prod['title'];
+								$coffee_price = $row_coffee_prod['price'];
+								$coffee_description = $row_coffee_prod['description'];
+								$coffee_image = $row_coffee_prod['image_name'];
+								$coffee_featured = $row_coffee_prod['featured'];
+								$coffee_active = $row_coffee_prod['active'];
+
+								if ($coffee_featured == "Yes" && $coffee_active == "Yes") {
+									if ($num3 == 4) {
+										break;
+									} else {
+			?>
+										<div class="col-md-3">
+											<div class="menu-entry">
+												<?php
+												if ($coffee_image == "") {
+
+													echo "<div class'error'>Image not available</div>";
+												} else {
+												?>
+													<a href="#" class="img" style="background-image: url(<?php echo $siteurl . 'admin/upload/product/' . $coffee_image; ?>);"></a>
+												<?php
+												}
+												?>
+
+												<div class="text text-center pt-4">
+													<h3><a href="#"><?php echo $coffee; ?></a></h3>
+													<p><?php echo $coffee_description; ?></p>
+													<p class="price"><span><?php echo $coffee_price; ?></span></p>
+													<p><a href="#" class="btn btn-primary btn-outline-primary">Add to Cart</a></p>
+												</div>
+											</div>
+										</div>
+
+			<?php
+										$num3++;
+									}
+								}
+							}
+						} else {
+						}
+					} else {
+					}
+				}
+			}
+
+
+			?>
+
+
 		</div>
 	</div>
 </section>
@@ -244,127 +289,9 @@ include_once "static/efq.php"
 	</div>
 </section>
 
-<section class="ftco-menu mb-5 pb-5">
-	<div class="container">
-		<div class="row justify-content-center mb-5">
-			<div class="col-md-7 heading-section text-center ftco-animate">
-				<span class="subheading">Discover</span>
-				<h2 class="mb-4">Our Products</h2>
-				<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-			</div>
-		</div>
-		<div class="row d-md-flex">
-			<div class="col-lg-12 ftco-animate p-md-5">
-				<div class="row">
-					<div class="col-md-12 nav-link-wrap mb-5">
-						<div class="nav ftco-animate nav-pills justify-content-center" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-							<?php
-							$sql3 = "SELECT * FROM tbl_categories";
-							$res3 = mysqli_query($conn, $sql3);
-							$count3 = mysqli_num_rows($res3);
-
-							if ($count3 > 0) {
-
-								while ($row3 = mysqli_fetch_assoc($res3)) {
-
-									$category_id2 = $row3['id'];
-									$category_title2 = $row3['title'];
-							?>
-									<a class="nav-link" id="v-pills-<?php echo $category_id2; ?>-tab" data-toggle="pill" href="#v-pills-<?php echo $category_id2; ?>" role="tab" aria-controls="v-pills-1" aria-selected="true"><?php echo $category_title2 ?></a>
-							<?php
-								}
-							} else {
-
-								echo "<div class'error'>Food not available</div>";
-							}
-
-							?>
-
-						</div>
-					</div>
-					<div class="col-md-12 d-flex align-items-center">
-
-						<div class="tab-content ftco-animate" id="v-pills-tabContent">
-							<?php
-							$sql4 = "SELECT * FROM tbl_categories";
-							$res4 = mysqli_query($conn, $sql4);
-							$count4 = mysqli_num_rows($res4);
-
-							if ($count4 > 0) {
-
-								while ($row4 = mysqli_fetch_assoc($res4)) {
-
-									$category_id3 = $row4['id'];
-
-							?>
-
-									<div class="tab-pane fade show active" id="v-pills-<?php echo $category_id3; ?>" role="tabpanel" aria-labelledby="v-pills-<?php echo $category_id3; ?>-tab">
-										<div class="row">
-
-											<?php
-
-											$sql5 = "SELECT * FROM tbl_food WHERE category_id=$category_id3";
-											$res5 = mysqli_query($conn, $sql5);
-											$count5 = mysqli_num_rows($res5);
-
-											if ($count5 > 0) {
-
-												while ($row5 = mysqli_fetch_assoc($res5)) {
-
-													$title2 = $row5['title'];
-													$price2 = $row5['price'];
-													$description2 = $row5['description'];
-													$image_name2 = $row5['image_name'];
-											?>
-													<div class="col-md-4 text-center">
-														<div class="menu-wrap">
-															<?php 
-																if($image_name2 == ""){
-
-																	echo "<div class'error'>Image not available</div>";
-
-																} else {
-																	?>
-																	<a href="#" class="menu-img img mb-4" style="background-image: url(<?php echo $siteurl .'admin/upload/product/'.$image_name2; ?>);"></a>
-																	<?php
-																}
-															?>
-															
-															<div class="text">
-																<h3><a href="#"><?php echo $title2; ?></a></h3>
-																<p><?php echo $description2;?></p>
-																<p class="price"><span><?php echo $price2;?></span></p>
-																<p><a href="#" class="btn btn-primary btn-outline-primary">Add to cart</a></p>
-															</div>
-														</div>
-													</div>
-											<?php
-												}
-											} else {
-
-												echo "<div class'error'>Category not available</div>";
-											}
-											?>
-
-										</div>
-									</div>
-
-							<?php
-								}
-							} else {
-
-								echo "<div class'error'>Category not available</div>";
-							}
-
-							?>
-
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</section>
+<?php
+include_once "static/product-list.php"
+?>
 
 <?php
 include_once "static/customersays.php"

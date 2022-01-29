@@ -46,17 +46,9 @@
 	          <li class="nav-item <?php active('services.php');?>"><a href="<?php echo $siteurl; ?>services.php" class="nav-link">Services</a></li>
 	          <li class="nav-item <?php active('blog.php');?>"><a href="<?php echo $siteurl; ?>blog.php" class="nav-link">Blog</a></li>
 	          <li class="nav-item <?php active('about.php');?>"><a href="<?php echo $siteurl; ?>about.php" class="nav-link">About</a></li>
-	          <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="room.html" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Shop</a>
-              <div class="dropdown-menu" aria-labelledby="dropdown04">
-              	<a class="dropdown-item" href="#">Shop</a>
-                <a class="dropdown-item" href="#">Single Product</a>
-                <a class="dropdown-item" href="#">Cart</a>
-                <a class="dropdown-item" href="#">Checkout</a>
-              </div>
-            </li>
+            <li class="nav-item <?php active('shop.php');?>"><a href="<?php echo $siteurl; ?>shop.php" class="nav-link">Shop</a></li>
 	          <li class="nav-item"><a href="#" class="nav-link">Contact</a></li>
-	          <li class="nav-item cart"><a href="#" class="nav-link"><span class="icon icon-shopping_cart"></span><span class="bag d-flex justify-content-center align-items-center"><small>1</small></span></a></li>
+	          <li class="nav-item cart"><a href="<?php echo $siteurl; ?>cart.php" class="nav-link"><span class="icon icon-shopping_cart"></span><span class="bag d-flex justify-content-center align-items-center"><small>1</small></span></a></li>
 	        </ul>
 	      </div>
 		  </div>
