@@ -1,7 +1,6 @@
 <?php
     include('config/constant.php');
 ?>
-<!DOCTYPE html>
 <html lang="en">
   <head>
     <title>SteaminMugs - Home</title>

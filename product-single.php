@@ -59,9 +59,11 @@ include_once "static/header.php"
 				}
 				?>
 			</div>
+
 			<div class="col-lg-6 product-details pl-md-5 ftco-animate">
 				<form action="" method="POST">
 					<h3><?php echo $title; ?></h3>
+					<input type="hidden" name="id" value="<?php echo $id; ?>">
 					<input type="hidden" name="food_img" value="<?php echo $current_image; ?>">
 					<input type="hidden" name="product" value="<?php echo $title; ?>">
 					<p class="price"><span><?php echo $price; ?></span></p>
@@ -158,8 +160,8 @@ include_once "static/header.php"
 
 									<div class="text text-center pt-4">
 										<h3><a href="#"><?php echo $title2; ?></a></h3>
-										<p>A small river named Duden flows by their place and supplies</p>
-										<p class="price"><span>$5.90</span></p>
+										<p><?php echo $description2; ?></p>
+										<p class="price"><span><?php echo $price2; ?></span></p>
 										<p><a href="#" class="btn btn-primary btn-outline-primary">Add to Cart</a></p>
 									</div>
 								</div>

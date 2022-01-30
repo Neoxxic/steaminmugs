@@ -31,36 +31,49 @@ function Redirect($url, $statusCode = 303)
 
 // ADD TO CART
 if(isset($_POST['add-to-cart'])){
-
-        $temp_id = time();
+        $id = $_POST['id'];
+        $temp_id = rand(0,9999) * rand(0,9999);
         $product = $_POST['product'];
         $product_img = $_POST['food_img'];
         $price = $_POST['price'];
         $qty = $_POST['quantity'];
         $size = $_POST['size'];
-        $order_date = date('Y-m-d h:i:sa');
+        $order_date = date('Y-m-d h:i:s');
         $status = "Add-to-cart";
+        $total = $price * $qty;
+        $fullname = "None";
+        $email = "None";
+        $phone = "None";
+        $address = "None";
+        $payment = "None";
 
         $sql4 = "INSERT INTO tbl_order SET
-        temp_id = '$temp_id',
-        food = '$product',
-        food_img = '$product_img',
-        price = '$price',
-        qty = '$qty',
-        size = '$size',
-        order_date = '$order_date',
-        status = '$status'
-    ";
+            temp_id = $temp_id,
+            food = '$product',
+            food_img = '$product_img',
+            price = $price,
+            qty = $qty,
+            size = '$size',
+            total = $total,
+            order_date = '$order_date',
+            status = '$status',
+            customer_name = '$fullname',
+            customer_contact = '$phone',
+            customer_email = '$email',
+            customer_address = '$address',
+            payment_method = '$payment'
+            ";
+
 
         $res4 = mysqli_query($conn, $sql4);
 
         if($res4 == true){
 
-        Redirect($siteurl.'checkout.php?order_temp_id='.$temp_id);
+            Redirect($siteurl.'checkout.php?order_temp_id='.$temp_id);
 
         }else{
 
-        Redirect($siteurl.'product-single.php?product_id='.$id);
+            Redirect($siteurl.'product-single.php?product_id='.$id);
 
         }
 
@@ -75,7 +88,7 @@ if(isset($_POST['place-order'])){
         $price = $_POST['price'];
         $qty = $_POST['qty'];
         $size = $_POST['size'];
-        $order_date = date('Y-m-d h:i:sa');
+        $order_date = date('Y-m-d H:i:s');
         $status = "order-complete";
         $fname = $_POST['firstname'];
         $lname = $_POST['lastname'];
