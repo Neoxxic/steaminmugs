@@ -77,10 +77,10 @@ include_once "static/header.php"
 								<div class="select-wrap">
 									<div class="icon"><span class="ion-ios-arrow-down"></span></div>
 									<select name="size" id="size" class="form-control">
-										<option value="small">Small</option>
-										<option value="medium">Medium</option>
-										<option value="large">Large</option>
-										<option value="extra-large">Extra Large</option>
+										<option value="small">Short</option>
+										<option value="medium">Tall</option>
+										<option value="large">Grande</option>
+										<option value="extra-large">Venti</option>
 									</select>
 								</div>
 							</div>
@@ -149,7 +149,7 @@ include_once "static/header.php"
 									if ($current_image != "") {
 
 									?>
-										<a href="<?php echo $siteurl; ?>admin/upload/product/<?php echo $current2_image2 ?>" class="img" style="background-image: url(<?php echo $siteurl; ?>admin/upload/product/<?php echo $current_image2 ?>);"></a>
+										<a href="<?php echo $siteurl.'product-single.php?product_id='. $product_id?>" class="img" style="background-image: url(<?php echo $siteurl; ?>admin/upload/product/<?php echo $current_image2 ?>);"></a>
 									<?php
 
 
@@ -159,10 +159,10 @@ include_once "static/header.php"
 									?>
 
 									<div class="text text-center pt-4">
-										<h3><a href="#"><?php echo $title2; ?></a></h3>
+										<h3><a href="<?php echo $siteurl.'product-single.php?product_id='. $product_id?>"><?php echo $title2; ?></a></h3>
 										<p><?php echo $description2; ?></p>
 										<p class="price"><span><?php echo $price2; ?></span></p>
-										<p><a href="#" class="btn btn-primary btn-outline-primary">Add to Cart</a></p>
+										<p><a href="<?php echo $siteurl.'product-single.php?product_id='. $product_id?>" class="btn btn-primary btn-outline-primary">Add to Cart</a></p>
 									</div>
 								</div>
 							</div>

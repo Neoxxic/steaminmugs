@@ -29,30 +29,29 @@
 									$featured = $row3['featured'];
 									$active = $row3['active'];
 
-									if($featured == "Yes" && $active == "Yes"){
+									if ($featured == "Yes" && $active == "Yes") {
 
-											?>
-												<a class="nav-link 
+							?>
+										<a class="nav-link 
 											<?php
-												if ($num == 0) {
+											if ($num == 0) {
 
 											?>
 												active" id="v-pills-<?php echo $category_id2; ?>-tab" data-toggle="pill" href="#v-pills-<?php echo $category_id2; ?>" role="tab" aria-controls="v-pills-<?php echo $category_id2; ?>" aria-selected="<?php echo $select1; ?>"><?php echo $category_title2 ?></a>
 
-											<?php
+									<?php
 												$category_selected = $category_id2;
 											} else {
-	
-											?>	
-												" id="v-pills-<?php echo $category_id2; ?>-tab" data-toggle="pill" href="#v-pills-<?php echo $category_id2; ?>" role="tab" aria-controls="v-pills-<?php echo $category_id2; ?>" aria-selected="<?php echo $select2; ?>"><?php echo $category_title2 ?></a>
-											<?php
-											
-										}
-											$num++;
-										
-									}
 
 									?>
+										" id="v-pills-<?php echo $category_id2; ?>-tab" data-toggle="pill" href="#v-pills-<?php echo $category_id2; ?>" role="tab" aria-controls="v-pills-<?php echo $category_id2; ?>" aria-selected="<?php echo $select2; ?>"><?php echo $category_title2 ?></a>
+								<?php
+
+											}
+											$num++;
+										}
+
+								?>
 						<?php
 								}
 							} else {
@@ -105,7 +104,7 @@
 										if ($count5 > 0) {
 
 											while ($row5 = mysqli_fetch_assoc($res5)) {
-                                                $product_id = $row5['id'];
+												$product_id = $row5['id'];
 												$title2 = $row5['title'];
 												$price2 = $row5['price'];
 												$description2 = $row5['description'];
@@ -114,6 +113,9 @@
 												$active = $row5['active'];
 
 												if ($featured == "Yes" && $active == "Yes") {
+													if ($num == 3) {
+														break;
+													} else {
 
 										?>
 														<div class="col-md-4 text-center">
@@ -124,21 +126,23 @@
 																	echo "<div class'error'>Image not available</div>";
 																} else {
 																?>
-																	<a href="<?php echo $siteurl.'product-single.php?product_id='. $product_id?>" class="menu-img img mb-4" style="background-image: url(<?php echo $siteurl . 'admin/upload/product/' . $image_name2; ?>);"></a>
+																	<a href="<?php echo $siteurl . 'product-single.php?product_id=' . $product_id ?>" class="menu-img img mb-4" style="background-image: url(<?php echo $siteurl . 'admin/upload/product/' . $image_name2; ?>);"></a>
 																<?php
 																}
 																?>
 
 																<div class="text">
-																	<h3><a href="<?php echo $siteurl.'product-single.php?product_id='. $product_id?>"><?php echo $title2; ?></a></h3>
+																	<h3><a href="<?php echo $siteurl . 'product-single.php?product_id=' . $product_id ?>"><?php echo $title2; ?></a></h3>
 																	<p><?php echo $description2; ?></p>
 																	<p class="price"><span><?php echo $price2; ?></span></p>
-																	<p><a href="<?php echo $siteurl.'product-single.php?product_id='. $product_id?>" class="btn btn-primary btn-outline-primary">Add to cart</a></p>
+																	<p><a href="<?php echo $siteurl . 'product-single.php?product_id=' . $product_id ?>" class="btn btn-primary btn-outline-primary">Add to cart</a></p>
 																</div>
 															</div>
 														</div>
 										<?php
 
+														$num++;
+													}
 												}
 											}
 										} else {

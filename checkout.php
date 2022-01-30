@@ -99,7 +99,7 @@ include_once "static/header.php"
 					<div class="row align-items-end">
 						<div class="col-md-6">
 							<div class="form-group">
-								<label for="firstname">Firt Name</label>
+								<label for="firstname">First Name</label>
 								<input name="firstname" type="text" class="form-control" placeholder="">
 							</div>
 						</div>

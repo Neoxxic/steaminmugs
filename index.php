@@ -11,8 +11,8 @@ include_once 'static/header.php'
 				<div class="col-md-8 col-sm-12 text-center ftco-animate">
 					<span class="subheading">Welcome</span>
 					<h1 class="mb-4">The Best Coffee Testing Experience</h1>
-					<p class="mb-4 mb-md-5">A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
-					<p><a href="#" class="btn btn-primary p-3 px-xl-4 py-xl-3">Order Now</a> <a href="#" class="btn btn-white btn-outline-white p-3 px-xl-4 py-xl-3">View Menu</a></p>
+					<p class="mb-4 mb-md-5">Steamin' Mugs will give you a satisfying clouds feeling in the morning.</p>
+					<p><a href="shop.php" class="btn btn-primary p-3 px-xl-4 py-xl-3">Order Now</a> <a href="menu.php" class="btn btn-white btn-outline-white p-3 px-xl-4 py-xl-3">View Menu</a></p>
 				</div>
 
 			</div>
@@ -27,8 +27,8 @@ include_once 'static/header.php'
 				<div class="col-md-8 col-sm-12 text-center ftco-animate">
 					<span class="subheading">Welcome</span>
 					<h1 class="mb-4">Amazing Taste &amp; Beautiful Place</h1>
-					<p class="mb-4 mb-md-5">A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
-					<p><a href="#" class="btn btn-primary p-3 px-xl-4 py-xl-3">Order Now</a> <a href="#" class="btn btn-white btn-outline-white p-3 px-xl-4 py-xl-3">View Menu</a></p>
+					<p class="mb-4 mb-md-5">A sweetness that will melt in your mouth in every bite. </p>
+					<p><a href="shop.php" class="btn btn-primary p-3 px-xl-4 py-xl-3">Order Now</a> <a href="menu.php" class="btn btn-white btn-outline-white p-3 px-xl-4 py-xl-3">View Menu</a></p>
 				</div>
 
 			</div>
@@ -43,8 +43,8 @@ include_once 'static/header.php'
 				<div class="col-md-8 col-sm-12 text-center ftco-animate">
 					<span class="subheading">Welcome</span>
 					<h1 class="mb-4">Creamy Hot and Ready to Serve</h1>
-					<p class="mb-4 mb-md-5">A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
-					<p><a href="#" class="btn btn-primary p-3 px-xl-4 py-xl-3">Order Now</a> <a href="#" class="btn btn-white btn-outline-white p-3 px-xl-4 py-xl-3">View Menu</a></p>
+					<p class="mb-4 mb-md-5">Take a sip of Strong, Mild, and Sweet drinks paired with a soft bite of tasty Cake & Pastry.</p>
+					<p><a href="shop.php" class="btn btn-primary p-3 px-xl-4 py-xl-3">Order Now</a> <a href="menu.php" class="btn btn-white btn-outline-white p-3 px-xl-4 py-xl-3">View Menu</a></p>
 				</div>
 
 			</div>
@@ -71,7 +71,7 @@ include_once "static/efq.php"
 				<div class="heading-section text-md-right ftco-animate">
 					<span class="subheading">Discover</span>
 					<h2 class="mb-4">Our Menu</h2>
-					<p class="mb-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
+					<p class="mb-4">Take a sip of our divine coffee, which is only available at our store, and pair it with a freshly baked pastry. Don't be hesitant to give our items a shot and you will never regret.</p>
 					<p><a href="<?php echo $siteurl . 'menu.php' ?>" class="btn btn-primary btn-outline-primary px-4 py-3">View Full Menu</a></p>
 				</div>
 			</div>
@@ -173,7 +173,7 @@ include_once "static/efq.php"
 			<div class="col-md-7 heading-section ftco-animate text-center">
 				<span class="subheading">Discover</span>
 				<h2 class="mb-4">Best Coffee Sellers</h2>
-				<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+				<p>We're passionate about coffee and we love to do things differently. Making one-of-a-kind great coffee lead us to a discovery of an experience that’s unlike any other. Our method extracts the greatest qualities from our coffee beans, resulting in distinct flavors and fragrances.</p>
 			</div>
 		</div>
 		<div class="row">
@@ -200,6 +200,7 @@ include_once "static/efq.php"
 						if ($count_coffee_prod > 0) {
 
 							while ($row_coffee_prod = mysqli_fetch_assoc($res_coffee_prod)) {
+								$product_id = $row_coffee_prod['id'];
 								$coffee = $row_coffee_prod['title'];
 								$coffee_price = $row_coffee_prod['price'];
 								$coffee_description = $row_coffee_prod['description'];
@@ -220,16 +221,16 @@ include_once "static/efq.php"
 													echo "<div class'error'>Image not available</div>";
 												} else {
 												?>
-													<a href="#" class="img" style="background-image: url(<?php echo $siteurl . 'admin/upload/product/' . $coffee_image; ?>);"></a>
+													<a href="<?php echo $siteurl.'product-single.php?product_id='. $product_id?>" class="img" style="background-image: url(<?php echo $siteurl . 'admin/upload/product/' . $coffee_image; ?>);"></a>
 												<?php
 												}
 												?>
 
 												<div class="text text-center pt-4">
-													<h3><a href="#"><?php echo $coffee; ?></a></h3>
+													<h3><a href="<?php echo $siteurl.'product-single.php?product_id='. $product_id?>"><?php echo $coffee; ?></a></h3>
 													<p><?php echo $coffee_description; ?></p>
 													<p class="price"><span><?php echo $coffee_price; ?></span></p>
-													<p><a href="#" class="btn btn-primary btn-outline-primary">Add to Cart</a></p>
+													<p><a href="<?php echo $siteurl.'product-single.php?product_id='. $product_id?>" class="btn btn-primary btn-outline-primary">Add to Cart</a></p>
 												</div>
 											</div>
 										</div>
@@ -290,7 +291,7 @@ include_once "static/efq.php"
 </section>
 
 <?php
-include_once "static/product-list.php"
+include_once "static/product-list-featured.php"
 ?>
 
 <?php
@@ -302,7 +303,7 @@ include_once "static/customersays.php"
 		<div class="row justify-content-center mb-5 pb-3">
 			<div class="col-md-7 heading-section ftco-animate text-center">
 				<h2 class="mb-4">Recent from blog</h2>
-				<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+				<p>Featuring some amazing experience at Steamin' Mugs of our beloved customers. Here are some glipse of their post in social media.</p>
 			</div>
 		</div>
 		<div class="row d-flex">

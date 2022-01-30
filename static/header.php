@@ -33,7 +33,8 @@
   <body>
   	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
 	    <div class="container">
-			<img class="navbar-brand" href="index.php" src="images/NooneMugs.png" style="height: 6rem; width: 8rem;">
+        
+        <a href="index.php" class="img" style="background-image: url(images/NooneMugs.png); height: 6rem; width: 8rem;" ></a>
 	      <!--<a class="navbar-brand" href="index.html">Coffee<small>Blend</small></a> -->
 	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 	        <span class="oi oi-menu"></span> Menu

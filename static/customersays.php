@@ -5,7 +5,7 @@
 	        <div class="col-md-7 heading-section text-center ftco-animate">
 	        	<span class="subheading">Testimony</span>
 	          <h2 class="mb-4">Customers Says</h2>
-	          <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+	          <p>Steamin' Mugs ensures that your first visit to our shop will be pleasurable and that you will want to return for more of the taste of love. Our service team is also courteous and meticulous, bringing the coffee to your table with a smile. One of the most coveted aims is to satisfy our consumers and earn their loyalty.</p>
 	        </div>
 	      </div>
 	    </div>
@@ -14,7 +14,7 @@
 	        <div class="col-lg align-self-sm-end">
 	          <div class="testimony">
 	             <blockquote>
-	                <p>&ldquo;Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small.&rdquo;</p>
+	                <p>I'll make sure to tell everyone of my friends and family about your coffee.</p>
 	              </blockquote>
 	              <div class="author d-flex mt-4">
 	                <div class="image mr-3 align-self-center">
@@ -27,52 +27,52 @@
 	        <div class="col-lg align-self-sm-end">
 	          <div class="testimony overlay">
 	             <blockquote>
-	                <p>&ldquo;Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.&rdquo;</p>
+	                <p>This is without a doubt the greatest coffee I've ever drank.</p>
 	              </blockquote>
 	              <div class="author d-flex mt-4">
 	                <div class="image mr-3 align-self-center">
 	                  <img src="images/person_2.jpg" alt="">
 	                </div>
-	                <div class="name align-self-center">Louise Kelly <span class="position">Illustrator Designer</span></div>
+	                <div class="name align-self-center">Justine Mark <span class="position">Illustrator Designer</span></div>
 	              </div>
 	          </div>
 	        </div>
 	        <div class="col-lg align-self-sm-end">
 	          <div class="testimony">
 	             <blockquote>
-	                <p>&ldquo;Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small  line of blind text by the name. &rdquo;</p>
+	                <p>Everyone is polite and knows a lot about the goods and the location. Customers will find it quite welcoming.</p>
 	              </blockquote>
 	              <div class="author d-flex mt-4">
 	                <div class="image mr-3 align-self-center">
 	                  <img src="images/person_3.jpg" alt="">
 	                </div>
-	                <div class="name align-self-center">Louise Kelly <span class="position">Illustrator Designer</span></div>
+	                <div class="name align-self-center">Anjanete Allado <span class="position">Illustrator Designer</span></div>
 	              </div>
 	          </div>
 	        </div>
 	        <div class="col-lg align-self-sm-end">
 	          <div class="testimony overlay">
 	             <blockquote>
-	                <p>&ldquo;Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however.&rdquo;</p>
+	                <p>Amazing barako classic coffee of the highest quality. Every morning, I'd like one!</p>
 	              </blockquote>
 	              <div class="author d-flex mt-4">
 	                <div class="image mr-3 align-self-center">
 	                  <img src="images/person_2.jpg" alt="">
 	                </div>
-	                <div class="name align-self-center">Louise Kelly <span class="position">Illustrator Designer</span></div>
+	                <div class="name align-self-center">Christoper Martin <span class="position">Illustrator Designer</span></div>
 	              </div>
 	          </div>
 	        </div>
 	        <div class="col-lg align-self-sm-end">
 	          <div class="testimony">
 	            <blockquote>
-	              <p>&ldquo;Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small  line of blind text by the name. &rdquo;</p>
+	              <p>The coffees are so delicious and the place is relaxing.</p>
 	            </blockquote>
 	            <div class="author d-flex mt-4">
 	              <div class="image mr-3 align-self-center">
 	                <img src="images/person_3.jpg" alt="">
 	              </div>
-	              <div class="name align-self-center">Louise Kelly <span class="position">Illustrator Designer</span></div>
+	              <div class="name align-self-center">Shin Park <span class="position">Illustrator Designer</span></div>
 	            </div>
 	          </div>
 	        </div>

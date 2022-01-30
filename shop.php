@@ -18,11 +18,12 @@
         </div>
       </div>
     </section>
+    
 
 <?php
 include_once "static/product-list.php"
 ?>
 
-    <?php
+<?php
 		include_once "static/footer.php"
-	?>
+?>

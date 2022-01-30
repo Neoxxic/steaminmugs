@@ -7,7 +7,7 @@
 	    					<div class="icon"><span class="icon-phone"></span></div>
 	    					<div class="text">
 	    						<h3>9876-142-0064</h3>
-	    						<p>A small river named Duden flows by their place and supplies.</p>
+	    						<p>For other inquiries just contact  us on the stated number above.</p>
 	    					</div>
 	    				</div>
 	    				<div class="col-md-4 d-flex ftco-animate">
