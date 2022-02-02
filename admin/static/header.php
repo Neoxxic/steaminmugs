@@ -173,10 +173,17 @@
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="#"
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="manage-booking.php"
                                 aria-expanded="false">
                                 <i class="mdi mdi-silverware"></i>
                                 <span class="hide-menu">Booking</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="manage-messages.php"
+                                aria-expanded="false">
+                                <i class="mdi mdi-bell"></i>
+                                <span class="hide-menu">Messages</span>
                             </a>
                         </li>
                         <li class="sidebar-item">

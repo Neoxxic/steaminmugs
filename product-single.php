@@ -66,7 +66,7 @@ include_once "static/header.php"
 					<input type="hidden" name="id" value="<?php echo $id; ?>">
 					<input type="hidden" name="food_img" value="<?php echo $current_image; ?>">
 					<input type="hidden" name="product" value="<?php echo $title; ?>">
-					<p class="price"><span><?php echo $price; ?></span></p>
+					<p id="price" data-pricevalue="<?php echo $price; ?>" class="price"><span id="priceDisplay"><?php echo $price; ?></span></p>
 					<input type="hidden" name="price" value="<?php echo $price; ?>">
 					<p><?php echo $description; ?></p>
 					<p>On her way she met a copy. The copy warned the Little Blind Text, that where it came from it would have been rewritten a thousand times and everything that was left from its origin would be the word "and" and the Little Blind Text should turn around and return to its own, safe country. But nothing the copy said could convince her and so it didn’t take long until a few insidious Copy Writers ambushed her, made her drunk with Longe and Parole and dragged her into their agency, where they abused her for their.
@@ -77,10 +77,10 @@ include_once "static/header.php"
 								<div class="select-wrap">
 									<div class="icon"><span class="ion-ios-arrow-down"></span></div>
 									<select name="size" id="size" class="form-control">
-										<option value="small">Short</option>
-										<option value="medium">Tall</option>
-										<option value="large">Grande</option>
-										<option value="extra-large">Venti</option>
+										<option value="Short" selected>Short</option>
+										<option value="Tall">Tall</option>
+										<option value="Grande">Grande</option>
+										<option value="Venti">Venti</option>
 									</select>
 								</div>
 							</div>
@@ -149,7 +149,7 @@ include_once "static/header.php"
 									if ($current_image != "") {
 
 									?>
-										<a href="<?php echo $siteurl.'product-single.php?product_id='. $product_id?>" class="img" style="background-image: url(<?php echo $siteurl; ?>admin/upload/product/<?php echo $current_image2 ?>);"></a>
+										<a href="<?php echo $siteurl . 'product-single.php?product_id=' . $product_id ?>" class="img" style="background-image: url(<?php echo $siteurl; ?>admin/upload/product/<?php echo $current_image2 ?>);"></a>
 									<?php
 
 
@@ -159,10 +159,10 @@ include_once "static/header.php"
 									?>
 
 									<div class="text text-center pt-4">
-										<h3><a href="<?php echo $siteurl.'product-single.php?product_id='. $product_id?>"><?php echo $title2; ?></a></h3>
+										<h3><a href="<?php echo $siteurl . 'product-single.php?product_id=' . $product_id ?>"><?php echo $title2; ?></a></h3>
 										<p><?php echo $description2; ?></p>
 										<p class="price"><span><?php echo $price2; ?></span></p>
-										<p><a href="<?php echo $siteurl.'product-single.php?product_id='. $product_id?>" class="btn btn-primary btn-outline-primary">Add to Cart</a></p>
+										<p><a href="<?php echo $siteurl . 'product-single.php?product_id=' . $product_id ?>" class="btn btn-primary btn-outline-primary">Add to Cart</a></p>
 									</div>
 								</div>
 							</div>
@@ -191,7 +191,7 @@ include_once "static/footer.php"
 <script>
 	$(document).ready(function() {
 
-		var quantitiy = 0;
+		var quantity = 0;
 		$('.quantity-right-plus').click(function(e) {
 
 			// Stop acting like a button
@@ -223,6 +223,37 @@ include_once "static/footer.php"
 		});
 
 	});
+
+	var tall = 10
+	var grande = 15
+	var venti = 20
+	var price = $('#price').data("pricevalue");
+	var basePrice = parseInt(price);
+
+	var sizeData = {
+		Short: basePrice,
+		Tall: basePrice + tall,
+		Grande: basePrice + tall + grande,
+		Venti: basePrice + tall + grande + venti,
+	}
+
+	$(function() {
+		$("#size").on('change', updateHandler);
+		$("#quantity").on('input', updateHandler);
+	});
+
+	function updateHandler(e) {
+		// accumulate the data
+		var value = $("#size").val();
+		var quantity = $("#quantity").val();
+		var price = sizeData[value];
+		var endPrice = price * quantity;
+
+		// display the data
+		$('#priceDisplay').html(price);
+		$("#sizeDisplay").html(value);
+		$("#totalDisplay").html(endPrice);
+	}
 </script>
 
 

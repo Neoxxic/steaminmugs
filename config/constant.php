@@ -155,3 +155,75 @@ if(isset($_POST['place-order'])){
 
 
 }
+//APPOINTMENT
+if(isset($_POST['book-me'])){
+
+    $fname = $_POST['fname'];
+    $lname = $_POST['lname'];
+    $fullname = $fname .' '. $lname;
+    $date = $_POST['date'];
+    $time = $_POST['time'];
+    $phone = $_POST['phone'];
+    $message = $_POST['message'];
+    $status = $_POST['status'];
+
+    $sql = "INSERT INTO tbl_booking SET
+            name = '$fullname',
+            date = '$date',
+            time = '$time',
+            phone = '$phone',
+            message = '$message',
+            status = '$status'
+            ";
+
+    $res = mysqli_query($conn, $sql);
+
+    if($res == true){
+
+        $_SESSION['order-complete'] = "Booking Complete";
+        Redirect($siteurl.'index.php');
+
+    }else {
+
+        $_SESSION['order-complete'] = "Failed to book";
+        Redirect($siteurl.'contact.php');
+
+    }
+
+}
+
+
+//CONTACT US
+if(isset($_POST['contact-us'])){
+
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $subject = $_POST['subject'];
+    $message = $_POST['message'];
+    $date =  date('Y-m-d h:i:s');
+
+    $sql = "INSERT INTO tbl_messages SET
+            name = '$name',
+            email = '$email',
+            subject = '$subject',
+            message = '$message',
+            date = '$date'
+            ";
+
+    $res = mysqli_query($conn, $sql);
+
+    if ($res == true){
+
+        $_SESSION['message-sent'] = "Message Sent";
+        Redirect($siteurl.'index.php');
+
+
+    } else {
+
+        $_SESSION['message-sent'] = "Failed to send message";
+        Redirect($siteurl.'contact.php');
+
+
+    }
+
+}

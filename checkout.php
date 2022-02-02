@@ -30,6 +30,7 @@ include_once "static/header.php"
 								<th>&nbsp;</th>
 								<th>&nbsp;</th>
 								<th>Product</th>
+								<th>Size</th>
 								<th>Price</th>
 								<th>Quantity</th>
 								<th>Total</th>
@@ -50,9 +51,22 @@ include_once "static/header.php"
 							$price = $row['price'];
 							$qty = $row['qty'];
 							$size = $row['size'];
+
+							if($size == "Short"){
+								$price = $price;
+							} elseif ($size == "Tall"){
+								$price = $price + 10;
+							} elseif ($size == "Grande"){
+								$price = $price + 25;
+							} elseif ($size == "Venti"){
+								$price = $price + 55;
+							}
+
 							$order_date = $row['order_date'];
 							$status = $row['status'];
 							$total = $qty * $price;
+
+							
 
 
 							?>
@@ -76,7 +90,8 @@ include_once "static/header.php"
 								<td class="product-name">
 									<h3><?php echo $product; ?></h3>
 								</td>
-
+								
+								<td class="price"><?php echo $size; ?></td>
 								<td class="price"><?php echo $price; ?></td>
 
 								<td class="quantity">

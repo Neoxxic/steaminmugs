@@ -464,7 +464,7 @@ if (isset($_POST['update-order'])) {
 }
 
 //ADD ORDER
-if(isset($_POST['add-order'])) {
+if (isset($_POST['add-order'])) {
 
     $temp_id = rand(0, 9999) * rand(0, 9999);
     $title = $_POST['product'];
@@ -483,18 +483,15 @@ if(isset($_POST['add-order'])) {
 
     $mop = $_POST['payment'];
 
-    if($mop == "cod"){
+    if ($mop == "cod") {
 
         $payment = "Cash on delivery";
-
-    } elseif($mop == "bank") {
+    } elseif ($mop == "bank") {
 
         $payment = "Bank Transfer";
-
-    } elseif($mop == "gcash"){
+    } elseif ($mop == "gcash") {
 
         $payment = "Gcash";
-
     }
 
     $sql = "INSERT INTO tbl_order SET
@@ -516,21 +513,91 @@ if(isset($_POST['add-order'])) {
 
     $res = mysqli_query($conn, $sql);
 
-    if ($res == True){
+    if ($res == True) {
 
         $_SESSION['add-order'] = "<div class='alert alert-success'>
                                         Order Added Successfully
                                     </div>";
         Redirect($siteurl . 'admin/manage-orders.php');
-
     } else {
 
         $_SESSION['add-order'] = "<div class='alert alert-danger'>
                                         Failed to add Ordef
                                     </div>";
         Redirect($siteurl . 'admin/manage-orders.php');
-
     }
+}
+
+//UPDATE BOOKING
+if (isset($_POST['update-booking'])) {
+    $id = $_POST['id'];
+    $name = $_POST['fullname'];
+    $date = $_POST['date'];
+    $time = $_POST['time'];
+    $phone = $_POST['phone'];
+    $message = $_POST['message'];
+
+    $sql = "UPDATE tbl_booking SET
+            name = '$name',
+            date = '$date',
+            time = '$time',
+            phone = '$phone',
+            message = '$message'
+            WHERE id=$id
+            ";
+
+    $res = mysqli_query($conn, $sql);
 
 
+    if ($res == true) {
+
+        $_SESSION['update-booking'] = "<div class='alert alert-success'>
+                                        Appointment Updated Successfully
+                                    </div>";
+        Redirect($siteurl . 'admin/manage-booking.php');
+    } else {
+
+        $_SESSION['update-booking'] = "<div class='alert alert-danger'>
+                                       Failed to Update Appointment
+                                    </div>";
+        Redirect($siteurl . 'admin/manage-booking.php');
+    }
+}
+
+//ADD BOOKING
+if (isset($_POST['add-appointment'])) {
+
+    $name = $_POST['fullname'];
+    $date = $_POST['date'];
+    $time = $_POST['time'];
+    $phone = $_POST['phone'];
+    $message = $_POST['message'];
+    $status = $_POST['status'];
+    
+
+    $sql = "INSERT INTO tbl_booking SET
+            name = '$name',
+            date = '$date',
+            time = '$time',
+            phone = '$phone',
+            message = '$message',
+            status = '$status'
+            
+            ";
+
+    $res = mysqli_query($conn, $sql);
+
+    if ($res == true) {
+
+        $_SESSION['add-booking'] = "<div class='alert alert-success'>
+                                        Appointment Added Successfully
+                                    </div>";
+        Redirect($siteurl . 'admin/manage-booking.php');
+    } else {
+
+        $_SESSION['add-booking'] = "<div class='alert alert-danger'>
+                                        Failed to Add Appointment
+                                    </div>";
+        Redirect($siteurl . 'admin/manage-booking.php');
+    }
 }
