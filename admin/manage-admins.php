@@ -47,7 +47,9 @@
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>
+                                        <th scope="col">Profile</th>
                                         <th scope="col">Name</th>
+                                        <th scope="col">Info</th>
                                         <th scope="col">Username</th>
                                         <th scope="col">Action</th>
                                     </tr>
@@ -73,17 +75,48 @@
                                                     $id=$rows['id'];
                                                     $full_name=$rows['full_name'];
                                                     $username=$rows['username'];
+                                                    $admin_img = $rows['admin_img'];
+                                                    $admin_info = $rows['admin_info']
 
                                                     ?>
 
                                                     <tr>
                                                         <th scope="row"><?php echo $sn++; ?></th>
-                                                        <td><?php echo $full_name?></td>
-                                                        <td><?php echo $username?></td>
+                                                        
                                                         <td>
-                                                            <a href="<?php echo $siteurl?>admin/update-admin.php?id=<?php echo $id;?>" class="btn btn-dark mdi mdi-pencil" title="Update Admin"> Update</a>
-                                                            <a href="<?php echo $siteurl?>admin/update-password.php?id=<?php echo $id;?>" class="btn btn-primary mdi mdi-account-edit" title="Change Password"> Change Password</a>
-                                                            <a href="<?php echo $siteurl?>admin/delete-admin.php?id=<?php echo $id; ?>" class="btn btn-danger mdi mdi-delete" title="Delete Admin"></a>
+                                                            <?php 
+                                                                if($admin_img!=""){
+
+                                                                    ?>
+                                                                    
+                                                                    <img src="<?php echo $siteurl;?>admin/upload/admin/<?php echo $admin_img;?>" class="img-thumbnail" width="100">
+                                                                    
+                                                                    <?php
+    
+                                                                    
+    
+                                                                }else{
+    
+                                                                    echo "<div class='error'>Image not Added</div>";
+    
+                                                                }
+                                                            ?>
+                                                        </td>
+                                                        <td><?php echo $full_name;?></td>
+                                                        <td><?php echo $admin_info;?></td>
+                                                        <td><?php echo $username;?></td>
+                                                        <td>
+                                                            
+                                                            <?php
+                                                                if($_SESSION['user'] == "Admin" || $_SESSION['user'] == "Shin" || $_SESSION['user'] == $username){
+                                                                    ?>
+                                                                        <a href="<?php echo $siteurl?>admin/update-admin.php?id=<?php echo $id;?>" class="btn btn-dark mdi mdi-pencil" title="Update Admin"> Update</a>
+                                                                        <a href="<?php echo $siteurl?>admin/update-password.php?id=<?php echo $id;?>" class="btn btn-primary mdi mdi-account-edit" title="Change Password"> Change Password</a>
+                                                                        <a href="<?php echo $siteurl?>admin/delete-admin.php?id=<?php echo $id; ?>&image_name=<?php echo $admin_img;?>" class="btn btn-danger mdi mdi-delete" title="Delete Admin"></a>
+                                                                    <?php
+                                                                }
+                                                            ?>
+                                                            
                                                         </td>
                                                     </tr>
 
@@ -121,6 +154,10 @@
                 if (isset($_SESSION['delete'])) {
                     echo $_SESSION['delete'];
                     unset($_SESSION['delete']);
+                }
+                if (isset($_SESSION['delete-admin'])) {
+                    echo $_SESSION['delete-admin'];
+                    unset($_SESSION['delete-admin']);
                 }
                 if (isset($_SESSION['update'])) {
                     ?>

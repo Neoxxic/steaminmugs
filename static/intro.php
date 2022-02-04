@@ -45,8 +45,7 @@
 						</div>
 						<div class="form-group ml-md-4">
 							<div class="input-wrap">
-								<div class="icon"><span class="ion-ios-clock"></span></div>
-								<input type="text" name="time" class="form-control appointment_time" placeholder="Time">
+								<input type="time" name="time" class="form-control" placeholder="Time" min="08:00" max="20:00">
 							</div>
 						</div>
 						<div class="form-group ml-md-4">

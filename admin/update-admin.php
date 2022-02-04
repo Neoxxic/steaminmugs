@@ -45,6 +45,14 @@
                     <h4 class="card-title">Admin Forms</h4>
                     <h5 class="card-subtitle">Update the details below</h5>
                     <?php
+                    if (isset($_SESSION['update'])) {
+                        ?>
+                        <div class="alert alert-danger">
+                            <?php echo $_SESSION['update'];?>
+                        </div>
+                        <?php
+                        unset($_SESSION['update']);
+                    }
 
                         $id=$_GET['id'];
 
@@ -58,9 +66,13 @@
                             if($count==1){
                                 
                                 $row=mysqli_fetch_assoc($res);
+                                    
+                                    $id=$row['id'];
+                                    $full_name = $row['full_name'];
+                                    $username = $row['username'];
+                                    $current_image = $row['admin_img'];
+                                    $admin_info = $row['admin_info'];
 
-                                $full_name = $row['full_name'];
-                                $username = $row['username'];
 
                             } else {
                                 
@@ -71,20 +83,45 @@
                         }
 
                     ?>
-                    <form class="form-horizontal mt-4" action="" method="POST">
+                    <form class="form-horizontal mt-4" action="" enctype="multipart/form-data" method="POST">
                         <div class="form-group">
                             <label>Full Name</label>
-                            <input type="text" class="form-control" placeholder="Enter your Name" name="full_name" value="<?php echo $full_name?>">
+                            <input type="text" class="form-control" placeholder="Enter your Name" name="full_name" value="<?php echo $full_name;?>">
+                        </div>
+                        <div class="form-group">
+                                    <label>Current Image:</label>
+                                    <?php 
+                                        if($current_image!= ""){
+                                            
+                                            ?>
+                                            <img src="<?php echo $siteurl; ?>admin/upload/admin/<?php echo $current_image?>" class="img-thumbnail" width="100">
+                                            <?php
+
+
+                                        } else {
+                                            echo "<div class='message-error'>Image not found</div>";
+                                        }
+                                    ?>
+                        </div>
+                        <div class="form-group">
+                            <label>Select Image:</label>
+                            <input type="file" name="upload" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label>Description:</label>
+                            <textarea name="admin_info" class="form-control" rows="5"><?php echo $admin_info;?></textarea>
                         </div>
                         <div class="form-group">
                             <label>Username</label>
-                            <input type="text" class="form-control" placeholder="Username" name="username" value="<?php echo $username?>">
+                            <input type="text" class="form-control" placeholder="Username" name="username" value="<?php echo $username;?>">
                         </div>
+                        <div>
                             <input type="hidden" name="id" value="<?php echo $id;?>">
                             <input type="submit" class="btn btn-success text-white mdi mdi-account-plus" name="update" value="Update Admin">
                         </div>
                     </form>
                 </div>
+                
             </div>
         </div>
         <!-- ============================================================== -->

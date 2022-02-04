@@ -56,6 +56,21 @@ include_once 'static/header.php'
 include_once "static/intro.php"
 ?>
 
+<section class="ftco-section">
+	<div class="container">
+		<div class="row justify-content-center mb-5 pb-3">
+			<div class="col-md-7 heading-section ftco-animate text-center">
+				<span class="subheading">Learn More</span>
+				<h2 class="mb-4">About Steamin'Mugs</h2>
+			</div>
+			<iframe class="promotional-video" title="vimeo-player" src="https://player.vimeo.com/video/673418075?h=18a9e1d124" width="100%" height="100%" frameborder="0" allowfullscreen></iframe>
+			<!-- <iframe src="https://player.vimeo.com/video/673418075?h=18a9e1d124&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen style="padding: -10% 0 -10% 0; position:relative;top:0;left:0;width: 1280px; height: 720px;" title="Final Promotional Vid"></iframe> -->
+
+		</div>
+	</div>
+</section>
+
+
 <?php
 include_once "static/story.php"
 ?>
@@ -91,7 +106,7 @@ include_once "static/efq.php"
 							$categories_active = $row_categ['active'];
 
 							if ($categories_featured == "Yes" && $categories_active == "Yes") {
-					?>
+							?>
 								<div class="col-md-6">
 									<div class="menu-entry">
 										<?php
@@ -105,7 +120,7 @@ include_once "static/efq.php"
 										?>
 									</div>
 								</div>
-					<?php
+							<?php
 							} else {
 							}
 						}
@@ -221,16 +236,16 @@ include_once "static/efq.php"
 													echo "<div class'error'>Image not available</div>";
 												} else {
 												?>
-													<a href="<?php echo $siteurl.'product-single.php?product_id='. $product_id?>" class="img" style="background-image: url(<?php echo $siteurl . 'admin/upload/product/' . $coffee_image; ?>);"></a>
+													<a href="<?php echo $siteurl . 'product-single.php?product_id=' . $product_id ?>" class="img" style="background-image: url(<?php echo $siteurl . 'admin/upload/product/' . $coffee_image; ?>);"></a>
 												<?php
 												}
 												?>
 
 												<div class="text text-center pt-4">
-													<h3><a href="<?php echo $siteurl.'product-single.php?product_id='. $product_id?>"><?php echo $coffee; ?></a></h3>
+													<h3><a href="<?php echo $siteurl . 'product-single.php?product_id=' . $product_id ?>"><?php echo $coffee; ?></a></h3>
 													<p><?php echo $coffee_description; ?></p>
 													<p class="price"><span><?php echo $coffee_price; ?></span></p>
-													<p><a href="<?php echo $siteurl.'product-single.php?product_id='. $product_id?>" class="btn btn-primary btn-outline-primary">Add to Cart</a></p>
+													<p><a href="<?php echo $siteurl . 'product-single.php?product_id=' . $product_id ?>" class="btn btn-primary btn-outline-primary">Add to Cart</a></p>
 												</div>
 											</div>
 										</div>

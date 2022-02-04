@@ -74,36 +74,7 @@
                 </div>
             </div>
         </div>
-        <?php 
 
-        if(isset($_POST['login'])){
-
-            $username = $_POST['username'];
-            $password = md5($_POST['password']);
-
-            $sql = "SELECT * FROM tbl_admin WHERE username='$username' AND password='$password'";
-
-            $res = mysqli_query($conn, $sql);
-
-            $count = mysqli_num_rows($res);
-
-            if($count==1){
-
-                $_SESSION['login'] = "Login Successful";
-                $_SESSION['user'] = $username;
-
-                Redirect($siteurl.'admin/index.php');
-
-            }else{
-
-                $_SESSION['f-login'] = "Login Failed! Please Try Again";
-                Redirect($siteurl.'admin/login.php');
-
-            }
-
-        }
-        
-        ?>
 
         <!-- ============================================================== -->
         <!-- End PAge Content -->

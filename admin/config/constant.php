@@ -20,6 +20,30 @@ function Redirect($url, $statusCode = 303)
     die();
 }
 
+//LOGIN
+if (isset($_POST['login'])) {
+
+    $username = $_POST['username'];
+    $password = md5($_POST['password']);
+
+    $sql = "SELECT * FROM tbl_admin WHERE username='$username' AND password='$password'";
+
+    $res = mysqli_query($conn, $sql);
+
+    $count = mysqli_num_rows($res);
+
+    if ($count == 1) {
+
+        $_SESSION['login'] = "Login Successful";
+        $_SESSION['user'] = $username;
+
+        Redirect($siteurl . 'admin/index.php');
+    } else {
+
+        $_SESSION['f-login'] = "Login Failed! Please Try Again";
+        Redirect($siteurl . 'admin/login.php');
+    }
+}
 
 //ADD ADMIN
 if (isset($_POST['submit'])) {
@@ -27,24 +51,64 @@ if (isset($_POST['submit'])) {
     $full_name = $_POST['full_name'];
     $username = $_POST['username'];
     $password = md5($_POST['password']);
+    $admin_info = $_POST['admin_info'];
 
+    if (isset($_FILES['upload']['name'])) {
 
-    $sql = "INSERT INTO tbl_admin SET
+        $image_name = $_FILES['upload']['name'];
+
+        if ($image_name != "") {
+
+            $ext = pathinfo($image_name, PATHINFO_EXTENSION);
+
+            $image_name = "Admin-Image_" . time() . '.' . $ext;
+
+            $source_path = $_FILES['upload']['tmp_name'];
+            $destination_path = "upload/admin/" . $image_name;
+
+            $uploadImage = copy($source_path, $destination_path);
+
+            if ($uploadImage == false) {
+
+                $_SESSION['upload-admin'] = "Failed to Upload Image";
+                header('Location: ' . $siteurl . 'admin/add-admin.php');
+                die();
+            }
+        }
+    } else {
+
+        $image_name = "";
+    }
+
+    if($_SESSION['user'] == "Admin" || $_SESSION['user'] == "Shin" ){
+
+        $sql = "INSERT INTO tbl_admin SET
                 full_name='$full_name',
+                admin_img='$image_name',
+                admin_info='$admin_info',
                 username='$username',
                 password='$password'
                 ";
 
 
-    $res = mysqli_query($conn, $sql);
-    //Checker
-    if ($res == TRUE) {
-        $_SESSION['add'] = "Admin added successfully";
-        Redirect($siteurl . 'admin/manage-admins.php');
+        $res = mysqli_query($conn, $sql);
+        //Checker
+        if ($res == TRUE) {
+            $_SESSION['add'] = "Admin added successfully";
+            Redirect($siteurl . 'admin/manage-admins.php');
+        } else {
+            $_SESSION['add'] = "Failed to Add New Admin";
+            Redirect($siteurl . 'admin/add-admin.php');
+        }
+
     } else {
-        $_SESSION['add'] = "Failed to Add New Admin";
+
+        $_SESSION['add'] = "You don't have enough permission to Add New Admin.";
         Redirect($siteurl . 'admin/add-admin.php');
+
     }
+
+    
 }
 
 //UPDATE ADMIN
@@ -53,74 +117,128 @@ if (isset($_POST['update'])) {
     $id = $_POST['id'];
     $full_name = $_POST['full_name'];
     $username = $_POST['username'];
+    $admin_info = $_POST['admin_info'];
 
-    $sql = "UPDATE tbl_admin SET
-                full_name = '$full_name',
-                username = '$username'
-                WHERE id='$id'
-                ";
+    if (isset($_FILES['upload']['name'])) {
 
-    $res = mysqli_query($conn, $sql);
+        $image_name = $_FILES['upload']['name'];
 
-    if ($res == TRUE) {
+        if ($image_name != "") {
 
-        $_SESSION['update'] = "Admin Update Successfully";
-        Redirect($siteurl . 'admin/manage-admins.php');
+            $ext = pathinfo($image_name, PATHINFO_EXTENSION);
+
+            $image_name = "Admin-Image_" . time() . '.' . $ext;
+
+            $source_path = $_FILES['upload']['tmp_name'];
+            $destination_path = "upload/admin/" . $image_name;
+
+            $uploadImage = copy($source_path, $destination_path);
+
+            if ($uploadImage == false) {
+
+                $_SESSION['upload-admin'] = "Failed to Upload Image";
+                header('Location: ' . $siteurl . 'admin/update-admin.php');
+                die();
+            }
+        }
     } else {
 
-        $_SESSION['update'] = "Failed to Update the Admin";
-        Redirect($siteurl . 'admin/update-admin.php');
+        $image_name = "";
     }
+
+    if($_SESSION['user'] == "Admin" || $_SESSION['user'] == "Shin" || $_SESSION['user'] == $username ) {
+
+
+        $sql = "UPDATE tbl_admin SET
+        full_name = '$full_name',
+        admin_img = '$image_name',
+        admin_info = '$admin_info',
+        username = '$username'
+        WHERE id='$id'
+        ";
+
+        $res = mysqli_query($conn, $sql);
+
+        if ($res == TRUE) {
+
+            $_SESSION['update'] = "Admin Update Successfully";
+            Redirect($siteurl . 'admin/manage-admins.php');
+            } else {
+
+            $_SESSION['update'] = "Failed to Update the Admin";
+            Redirect($siteurl . 'admin/update-admin.php');
+            }
+
+    } else {
+
+        $_SESSION['update'] = "You don't have enough permission to Update Other Admin.";
+        Redirect($siteurl . 'admin/update-admin.php?id='.$id);
+
+    }
+
+   
 }
 
 //CHANGE PASSWORD ADMIN
 if (isset($_POST['change'])) {
 
     $id = $_POST['id'];
+    $username = $_POST['username'];
     $current_password = md5($_POST['current_password']);
     $new_password = md5($_POST['new_password']);
     $confirm_password = md5($_POST['confirm_password']);
 
-    $sql = "SELECT * FROM tbl_admin WHERE id=$id AND password='$current_password'";
+    if($_SESSION['user'] == "Admin" || $_SESSION['user'] == "Shin" || $_SESSION['user'] == $username) {
 
-    $res = mysqli_query($conn, $sql);
+        $sql = "SELECT * FROM tbl_admin WHERE id=$id AND password='$current_password'";
 
-    if ($res == TRUE) {
+        $res = mysqli_query($conn, $sql);
 
-        $count = mysqli_num_rows($res);
+        if ($res == TRUE) {
 
-        if ($count == 1) {
+            $count = mysqli_num_rows($res);
+
+            if ($count == 1) {
 
 
-            if ($new_password == $confirm_password) {
+                if ($new_password == $confirm_password) {
 
-                $sql2 = "UPDATE tbl_admin SET
-                            password='$new_password'
-                            WHERE id=$id
-                            ";
+                    $sql2 = "UPDATE tbl_admin SET
+                                password='$new_password'
+                                WHERE id=$id
+                                ";
 
-                $res2 = mysqli_query($conn, $sql2);
+                    $res2 = mysqli_query($conn, $sql2);
 
-                if ($res2 == TRUE) {
+                    if ($res2 == TRUE) {
 
-                    $_SESSION['change-pwd'] = "Password Change Successfully";
-                    Redirect($siteurl . 'admin/manage-admins.php');
+                        $_SESSION['change-pwd'] = "Password Change Successfully";
+                        Redirect($siteurl . 'admin/manage-admins.php');
+                    } else {
+
+                        $_SESSION['f-change-pwd'] = "Failed to Change Password";
+                        Redirect($siteurl . 'admin/update-password.php?id=' . $id);
+                    }
                 } else {
 
-                    $_SESSION['f-change-pwd'] = "Failed to Change Password";
+                    $_SESSION['pwd-not-match'] = "Password Does Not Match";
                     Redirect($siteurl . 'admin/update-password.php?id=' . $id);
                 }
             } else {
 
-                $_SESSION['pwd-not-match'] = "Password Does Not Match";
-                Redirect($siteurl . 'admin/update-password.php?id=' . $id);
+                $_SESSION['user-not-found'] = "User not Found";
+                Redirect($siteurl . 'admin/manage-admins.php');
             }
-        } else {
-
-            $_SESSION['user-not-found'] = "User not Found";
-            Redirect($siteurl . 'admin/manage-admins.php');
         }
+
+    } else {
+
+        $_SESSION['permission'] = "You don't have permission to change password of other Admin.";
+        Redirect($siteurl . 'admin/update-password.php');
+
     }
+
+    
 }
 
 //ADD CATEGORY
@@ -573,7 +691,7 @@ if (isset($_POST['add-appointment'])) {
     $phone = $_POST['phone'];
     $message = $_POST['message'];
     $status = $_POST['status'];
-    
+
 
     $sql = "INSERT INTO tbl_booking SET
             name = '$name',
@@ -599,5 +717,258 @@ if (isset($_POST['add-appointment'])) {
                                         Failed to Add Appointment
                                     </div>";
         Redirect($siteurl . 'admin/manage-booking.php');
+    }
+}
+
+//ADD BlOG
+if (isset($_POST['add-blog'])) {
+
+    $blog_title = $_POST['title'];
+    $content1 = $_POST['description1'];
+    $content2 = $_POST['description2'];
+
+    if (isset($_POST['featured'])) {
+
+        $featured = $_POST['featured'];
+    } else {
+
+        $featured = "No";
+    }
+
+    if (isset($_POST['active'])) {
+
+        $active = $_POST['active'];
+    } else {
+
+        $active = "No";
+    }
+
+    $admin_id = $_POST['id'];
+    $date_posted = date('Y-m-d h:i:s');
+
+    if (isset($_FILES['upload1']['name'])) {
+
+        $image_1 = $_FILES['upload1']['name'];
+
+        if ($image_1 != "") {
+
+            $ext = pathinfo($image_1, PATHINFO_EXTENSION);
+
+            $image_1 = "Blog-Image_1" . time() . '.' . $ext;
+
+            $source_path = $_FILES['upload1']['tmp_name'];
+            $destination_path = "upload/blog/" . $image_1;
+
+            $uploadImage = copy($source_path, $destination_path);
+
+            if ($uploadImage == false) {
+
+                $_SESSION['upload-blog'] = "Failed to Upload Image";
+                header('Location: ' . $siteurl . 'admin/add-blog.php');
+                die();
+            }
+        }
+    } else {
+
+        $image_1 = "";
+    }
+
+    if (isset($_FILES['upload2']['name'])) {
+
+        $image_2 = $_FILES['upload2']['name'];
+
+        if ($image_2 != "") {
+
+            $ext = pathinfo($image_2, PATHINFO_EXTENSION);
+
+            $image_2 = "Blog-Image_2" . time() . '.' . $ext;
+
+            $source_path = $_FILES['upload2']['tmp_name'];
+            $destination_path = "upload/blog/" . $image_2;
+
+            $uploadImage = copy($source_path, $destination_path);
+
+            if ($uploadImage == false) {
+
+                $_SESSION['upload-blog'] = "Failed to Upload Image";
+                header('Location: ' . $siteurl . 'admin/add-blog.php');
+                die();
+            }
+        }
+    } else {
+
+        $image_2 = "";
+    }
+
+
+    $sql = "INSERT INTO tbl_blog SET
+            blog_title = '$blog_title',
+            content_1 = '$content1',
+            image_1 = '$image_1',
+            content_2 = '$content2',
+            image_2 = '$image_2',
+            featured = '$featured',
+            active = '$active',
+            admin_id = '$admin_id',
+            date_posted = '$date_posted'
+            ";
+
+    $res = mysqli_query($conn, $sql);
+
+    if ($res == true) {
+
+        $_SESSION['add-blog'] = "<div class='alert alert-success'>
+                                       Blog Added Successfully
+                                    </div>";
+        Redirect($siteurl . 'admin/manage-blogs.php');
+    } else {
+
+        $_SESSION['add-blog'] = "<div class='alert alert-danger'>
+                                       Failed to Add Blog
+                                    </div>";
+        Redirect($siteurl . 'admin/add-blog.php');
+    }
+}
+
+//UPDATE BLOG
+if (isset($_POST['update-blog'])) {
+    $id = $_POST['id'];
+    $blog_title = $_POST['title'];
+    $content1 = $_POST['description1'];
+    $content2 = $_POST['description2'];
+    $current_image1 = $_POST['current_image1'];
+    $current_image2 = $_POST['current_image2'];
+
+    if (isset($_POST['featured'])) {
+
+        $featured = $_POST['featured'];
+    } else {
+
+        $featured = "No";
+    }
+
+    if (isset($_POST['active'])) {
+
+        $active = $_POST['active'];
+    } else {
+
+        $active = "No";
+    }
+
+    $admin_id = $_POST['admin_id'];
+    $date_posted = date('Y-m-d h:i:s');
+
+    if (isset($_FILES['upload1']['name'])) {
+
+        $image_name = $_FILES['upload1']['name'];
+
+        if ($image_name != "") {
+
+            $ext = pathinfo($image_name, PATHINFO_EXTENSION);
+
+            $image_name = "Blog-Image_1" . time() . '.' . $ext;
+
+            $source_path = $_FILES['upload1']['tmp_name'];
+            $destination_path = "upload/blog/" . $image_name;
+
+            $uploadImage = copy($source_path, $destination_path);
+
+            if ($uploadImage == false) {
+                $_SESSION['upload'] = "Failed to Upload Image";
+                header('Location: ' . $siteurl . 'admin/manage-blogs.php');
+                die();
+            }
+
+            if ($current_image1 != "") {
+
+                $remove_path = "upload/blog/" . $current_image1;
+                $remove = unlink($remove_path);
+
+                if ($remove == false) {
+
+                    $_SESSION['f-remove-img'] = "Failed to remove current images";
+                    header($siteurl . 'admin/manage-blogs.php');
+                    die();
+                }
+            }
+        } else {
+
+            $image_name = $current_image1;
+        }
+    } else {
+
+        $image_name = $current_image1;
+    }
+    
+    if (isset($_FILES['upload2']['name'])) {
+
+        $image_name2 = $_FILES['upload2']['name'];
+
+        if ($image_name2 != "") {
+
+            $ext = pathinfo($image_name2, PATHINFO_EXTENSION);
+
+            $image_name2 = "Blog-Image_2" . time() . '.' . $ext;
+
+            $source_path = $_FILES['upload2']['tmp_name'];
+            $destination_path = "upload/blog/" . $image_name2;
+
+            $uploadImage = copy($source_path, $destination_path);
+
+            if ($uploadImage == false) {
+                $_SESSION['upload'] = "Failed to Upload Image";
+                header('Location: ' . $siteurl . 'admin/manage-blogs.php');
+                die();
+            }
+
+            if ($current_image2 != "") {
+
+                $remove_path = "upload/blog/" . $current_image2;
+                $remove = unlink($remove_path);
+
+                if ($remove == false) {
+
+                    $_SESSION['f-remove-img'] = "Failed to remove current images";
+                    header($siteurl . 'admin/manage-blogs.php');
+                    die();
+                }
+            }
+        } else {
+
+            $image_name2 = $current_image2;
+        }
+    } else {
+
+        $image_name2 = $current_image2;
+    }
+    
+
+    $sql = "UPDATE tbl_blog SET
+        blog_title = '$blog_title',
+        content_1 = '$content1',
+        image_1 = '$image_name',
+        content_2 = '$content2',
+        image_2 = '$image_name2',
+        featured = '$featured',
+        active = '$active',
+        admin_id = '$admin_id',
+        date_posted = '$date_posted'
+        WHERE id=$id
+    ";
+
+    $res = mysqli_query($conn, $sql);
+
+    if ($res == true) {
+
+        $_SESSION['add-blog'] = "<div class='alert alert-success'>
+                               Blog Added Successfully
+                            </div>";
+        Redirect($siteurl . 'admin/manage-blogs.php');
+    } else {
+
+        $_SESSION['add-blog'] = "<div class='alert alert-danger'>
+                               Failed to Add Blog
+                            </div>";
+        Redirect($siteurl . 'admin/add-blog.php');
     }
 }

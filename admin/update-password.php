@@ -48,6 +48,12 @@
 
                             if(isset($_GET['id'])){
                                 $id=$_GET['id'];
+
+                                $sql = "SELECT * FROM tbl_admin WHERE id=$id";
+                                $res = mysqli_query($conn, $sql);
+                                $row = mysqli_fetch_assoc($res);
+
+                                $username = $row['username'];
                             }
 
                         ?>
@@ -65,6 +71,7 @@
                                 <input type="password" class="form-control" placeholder="Confirm Password" name="confirm_password">
                             </div>
                             <div>
+                                <input type="hidden" name="username" value="<?php echo $username;?>">
                                 <input type="hidden" name="id" value="<?php echo $id;?>">
                                 <input type="submit" class="btn btn-success text-white mdi mdi-account-plus" name="change" value="Change Password">
                             </div>
@@ -75,6 +82,14 @@
                             ?>
                             <div class="alert alert-warning">
                                 <?php echo $_SESSION['pwd-not-match'];?>
+                            </div>
+                            <?php
+                            unset($_SESSION['pwd-not-match']);
+                        }
+                        if (isset($_SESSION['permission'])) {
+                            ?>
+                            <div class="alert alert-danger">
+                                <?php echo $_SESSION['permission'];?>
                             </div>
                             <?php
                             unset($_SESSION['pwd-not-match']);
