@@ -58,7 +58,7 @@ include_once "static/intro.php"
 
 <section class="ftco-section">
 	<div class="container">
-		<div class="row justify-content-center mb-5 pb-3">
+		<div class="row justify-content-center">
 			<div class="col-md-7 heading-section ftco-animate text-center">
 				<span class="subheading">Learn More</span>
 				<h2 class="mb-4">About Steamin'Mugs</h2>

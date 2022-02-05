@@ -152,6 +152,7 @@ if (isset($_POST['place-order'])) {
         Redirect($siteurl . 'cheekout.php?order_temp_id=' . $temp_id);
     }
 }
+
 //APPOINTMENT
 if (isset($_POST['book-me'])) {
 
@@ -190,7 +191,6 @@ if (isset($_POST['book-me'])) {
     }
 }
 
-
 //CONTACT US
 if (isset($_POST['contact-us'])) {
 
@@ -219,4 +219,39 @@ if (isset($_POST['contact-us'])) {
         $_SESSION['message-sent'] = "Failed to send message";
         Redirect($siteurl . 'contact.php');
     }
+}
+
+//COMMENT
+if (isset($_POST['comment'])){
+    $blog_id = $_POST['blog_id'];
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $message = $_POST['message'];
+    $date = date('Y-m-d h:i:s');
+    $active = "Yes";
+
+    $sql = "INSERT INTO tbl_comment SET
+            name = '$name',
+            email = '$email',
+            message = '$message',
+            active = '$active',
+            blog_id = '$blog_id',
+            date = '$date'
+            ";
+
+    $res = mysqli_query($conn, $sql);
+
+    if($res == True){
+
+        $_SESSION['comment'] = "Comment Posted";
+        Redirect($siteurl . 'blog-single.php?blog_id='.$blog_id);
+
+    } else {
+
+        $_SESSION['comment'] = "Failed To Comment";
+        Redirect($siteurl . 'blog.php');
+
+    }
+
+
 }

@@ -194,6 +194,13 @@
                             </a>
                         </li>
                         <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="manage-comment.php"
+                                aria-expanded="false">
+                                <i class="mdi mdi-comment"></i>
+                                <span class="hide-menu">Comment</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="manage-admins.php"
                                 aria-expanded="false">
                                 <i class="mdi mdi-account-multiple"></i>
