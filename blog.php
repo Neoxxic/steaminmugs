@@ -11,7 +11,7 @@ include_once "static/header.php"
 
         <div class="col-md-7 col-sm-12 text-center ftco-animate">
           <h1 class="mb-3 mt-5 bread">Blog</h1>
-          <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home</a></span> <span>Blog</span></p>
+          <p class="breadcrumbs"><span class="mr-2"><a href="index.php">Home</a></span> <span>Blog</span></p>
         </div>
 
       </div>
@@ -49,6 +49,11 @@ include_once "static/header.php"
 
           $admin_name = $row2['full_name'];
 
+          $sql3 = "SELECT * FROM tbl_comment WHERE blog_id=$id";
+          $res3 = mysqli_query($conn, $sql3);
+          $count3 = mysqli_num_rows($res3);
+          $row3 = mysqli_fetch_assoc($res3);
+
 
           if ($active == 'Yes') {
       ?>
@@ -68,7 +73,7 @@ include_once "static/header.php"
                   <div class="meta">
                     <div><a href="#"><?php echo date("m/d/Y", strtotime($date_posted))?></a></div>
                     <div><a href="#"><?php echo $admin_name;?></a></div>
-                    <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
+                    <div><a href="#" class="meta-chat"><span class="icon-chat"></span> <?php echo $count3;?></a></div>
                   </div>
                   <h3 class="heading mt-2"><a href="#"><?php echo $blog_title;?></a></h3>
                   <p><?php echo $content1?></p>

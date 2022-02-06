@@ -1,6 +1,6 @@
 <?php
-    include('../admin/config/constant.php');
-    include('../admin/config/login-check.php');
+include('../admin/config/constant.php');
+include('../admin/config/login-check.php');
 ?>
 <!DOCTYPE html>
 <html dir="static" lang="en">
@@ -40,8 +40,7 @@
     <!-- ============================================================== -->
     <!-- Main wrapper - style you can find in pages.scss -->
     <!-- ============================================================== -->
-    <div id="main-wrapper" data-navbarbg="skin6" data-theme="light" data-layout="vertical" data-sidebartype="full"
-        data-boxed-layout="full">
+    <div id="main-wrapper" data-navbarbg="skin6" data-theme="light" data-layout="vertical" data-sidebartype="full" data-boxed-layout="full">
         <!-- ============================================================== -->
         <!-- Topbar header - style you can find in pages.scss -->
         <!-- ============================================================== -->
@@ -79,7 +78,7 @@
                     <!-- ============================================================== -->
                     <!-- Toggle which is visible on mobile only -->
                     <!-- ============================================================== -->
-                    
+
                 </div>
                 <!-- ============================================================== -->
                 <!-- End Logo -->
@@ -116,9 +115,33 @@
                         <!-- ============================================================== -->
                         <!-- User profile and search -->
                         <!-- ============================================================== -->
+                        <?php
+
+                        $user = $_SESSION['user'];
+                        $sql = "SELECT * FROM tbl_admin WHERE username='$user'";
+                        $res = mysqli_query($conn, $sql);
+                        $row = mysqli_fetch_assoc($res);
+
+                        $profile_img = $row['admin_img'];
+
+
+
+                        ?>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src="../admin/assets/images/users/1.jpg" alt="user" class="rounded-circle" width="31">
+
+                                <?php
+                                if ($profile_img == "") {
+                                    ?>
+                                    <img src="<?php echo $siteurl . 'admin/upload/admin/default-profile.jpg'?>" alt="user" class="rounded-circle" width="31">
+                                    <?php
+                                } else {
+                                ?>
+                                    <img src="<?php echo $siteurl . 'admin/upload/admin/' . $profile_img; ?>" alt="user" class="rounded-circle" width="31">
+                                <?php
+                                }
+                                ?>
+                                
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end user-dd animated" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="logout.php"><i class="mdi mdi-logout-variant"></i>
@@ -145,64 +168,55 @@
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
                         <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="index.php"
-                                aria-expanded="false">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="index.php" aria-expanded="false">
                                 <i class="mdi mdi-av-timer"></i>
                                 <span class="hide-menu">Dashboard</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="manage-orders.php"
-                                aria-expanded="false">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="manage-orders.php" aria-expanded="false">
                                 <i class="mdi mdi-shopping"></i>
                                 <span class="hide-menu">Orders</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="manage-category.php"
-                                aria-expanded="false">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="manage-category.php" aria-expanded="false">
                                 <i class="mdi mdi-library-plus"></i>
                                 <span class="hide-menu">Category</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="manage-product.php"
-                                aria-expanded="false">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="manage-product.php" aria-expanded="false">
                                 <i class="mdi mdi-coffee"></i>
                                 <span class="hide-menu">Product</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="manage-booking.php"
-                                aria-expanded="false">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="manage-booking.php" aria-expanded="false">
                                 <i class="mdi mdi-silverware"></i>
                                 <span class="hide-menu">Booking</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="manage-messages.php"
-                                aria-expanded="false">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="manage-messages.php" aria-expanded="false">
                                 <i class="mdi mdi-bell"></i>
                                 <span class="hide-menu">Messages</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="manage-blogs.php"
-                                aria-expanded="false">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="manage-blogs.php" aria-expanded="false">
                                 <i class="mdi mdi-book"></i>
                                 <span class="hide-menu">Blogs</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="manage-comment.php"
-                                aria-expanded="false">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="manage-comment.php" aria-expanded="false">
                                 <i class="mdi mdi-comment"></i>
                                 <span class="hide-menu">Comment</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="manage-admins.php"
-                                aria-expanded="false">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="manage-admins.php" aria-expanded="false">
                                 <i class="mdi mdi-account-multiple"></i>
                                 <span class="hide-menu">Admin</span>
                             </a>
@@ -216,4 +230,3 @@
         <!-- ============================================================== -->
         <!-- End Left Sidebar - style you can find in sidebar.scss  -->
         <!-- ============================================================== -->
-        

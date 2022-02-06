@@ -11,7 +11,7 @@ include_once "static/header.php"
 
         <div class="col-md-7 col-sm-12 text-center ftco-animate">
           <h1 class="mb-3 mt-5 bread">Blog Details</h1>
-          <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home</a></span> <span class="mr-2"><a href="blog.html">Blog</a></span> <span>Blog Single</span></p>
+          <p class="breadcrumbs"><span class="mr-2"><a href="index.php">Home</a></span> <span class="mr-2"><a href="blog.php">Blog</a></span> <span>Blog Single</span></p>
         </div>
 
       </div>
@@ -306,11 +306,6 @@ if ($count == 1) {
             <a href="#" class="tag-cloud-link">desserts</a>
             <a href="#" class="tag-cloud-link">drinks</a>
           </div>
-        </div>
-
-        <div class="sidebar-box ftco-animate">
-          <h3>Paragraph</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus itaque, autem necessitatibus voluptate quod mollitia delectus aut, sunt placeat nam vero culpa sapiente consectetur similique, inventore eos fugit cupiditate numquam!</p>
         </div>
       </div>
 

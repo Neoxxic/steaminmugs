@@ -1,5 +1,5 @@
 <?php
-    include_once "../static/header.php"
+include_once "../static/header.php"
 ?>
 
 <body>
@@ -15,8 +15,7 @@
     <!-- ============================================================== -->
     <!-- Main wrapper - style you can find in pages.scss -->
     <!-- ============================================================== -->
-    <div id="main-wrapper" data-navbarbg="skin6" data-theme="light" data-layout="vertical" data-sidebartype="full"
-        data-boxed-layout="full">
+    <div id="main-wrapper" data-navbarbg="skin6" data-theme="light" data-layout="vertical" data-sidebartype="full" data-boxed-layout="full">
         <!-- ============================================================== -->
         <!-- Topbar header - style you can find in pages.scss -->
         <!-- ============================================================== -->
@@ -44,9 +43,9 @@
                             <!-- Logo text -->
                             <span class="logo-text">
                                 <!-- dark Logo text -->
-                                <img src="../../assets/images/logo-text.png"  alt="homepage" class="dark-logo" />
+                                <img src="../../assets/images/logo-text.png" alt="homepage" class="dark-logo" />
                                 <!-- Light Logo text -->
-                                <img src="../../assets/images/logo-text.png"  class="light-logo" alt="homepage" />
+                                <img src="../../assets/images/logo-text.png" class="light-logo" alt="homepage" />
                             </span>
                         </a>
                     </div>
@@ -56,7 +55,7 @@
                     <!-- ============================================================== -->
                     <!-- Toggle which is visible on mobile only -->
                     <!-- ============================================================== -->
-                    
+
                 </div>
                 <!-- ============================================================== -->
                 <!-- End Logo -->
@@ -126,50 +125,43 @@
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
                         <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="index.html"
-                                aria-expanded="false">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="index.html" aria-expanded="false">
                                 <i class="mdi mdi-av-timer"></i>
                                 <span class="hide-menu">Dashboard</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="pages-profile.html"
-                                aria-expanded="false">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="pages-profile.html" aria-expanded="false">
                                 <i class="mdi mdi-account-network"></i>
                                 <span class="hide-menu">Profile</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="form-basic.html"
-                                aria-expanded="false">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="form-basic.html" aria-expanded="false">
                                 <i class="mdi mdi-arrange-bring-forward"></i>
                                 <span class="hide-menu">Form Basic</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="table-basic.html"
-                                aria-expanded="false">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="table-basic.html" aria-expanded="false">
                                 <i class="mdi mdi-border-none"></i>
                                 <span class="hide-menu">Table</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="icon-material.html"
-                                aria-expanded="false">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="icon-material.html" aria-expanded="false">
                                 <i class="mdi mdi-face"></i>
                                 <span class="hide-menu">Icon</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="starter-kit.html"
-                                aria-expanded="false">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="starter-kit.html" aria-expanded="false">
                                 <i class="mdi mdi-file"></i>
                                 <span class="hide-menu">Blank</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="error-404.html"
-                                aria-expanded="false">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="error-404.html" aria-expanded="false">
                                 <i class="mdi mdi-alert-outline"></i>
                                 <span class="hide-menu">404</span>
                             </a>
@@ -220,6 +212,14 @@
                 <!-- Email campaign chart -->
                 <!-- ============================================================== -->
                 <div class="row">
+                    <div class="col-lg-8">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Sales Ratio</h4>
+                                <div class="sales ct-charts mt-3"></div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="col-lg-8">
                         <div class="card">
                             <div class="card-body">
@@ -348,8 +348,7 @@
                                 <!-- Comment Row -->
                                 <div class="d-flex flex-row comment-row mt-0">
                                     <div class="p-2">
-                                        <img src="../../assets/images/users/1.jpg" alt="user" width="50"
-                                            class="rounded-circle">
+                                        <img src="../../assets/images/users/1.jpg" alt="user" width="50" class="rounded-circle">
                                     </div>
                                     <div class="comment-text w-100">
                                         <h6 class="font-medium">James Anderson</h6>
@@ -374,8 +373,7 @@
                                 </div>
                                 <div class="d-flex flex-row comment-row">
                                     <div class="p-2">
-                                        <img src="../../assets/images/users/5.jpg" alt="user" width="50"
-                                            class="rounded-circle">
+                                        <img src="../../assets/images/users/5.jpg" alt="user" width="50" class="rounded-circle">
                                     </div>
                                     <div class="comment-text w-100">
                                         <h6 class="font-medium">Johnathan Doeting</h6>
@@ -401,8 +399,7 @@
                                 <!-- Comment Row -->
                                 <div class="d-flex flex-row comment-row mt-0">
                                     <div class="p-2">
-                                        <img src="../../assets/images/users/2.jpg" alt="user" width="50"
-                                            class="rounded-circle">
+                                        <img src="../../assets/images/users/2.jpg" alt="user" width="50" class="rounded-circle">
                                     </div>
                                     <div class="comment-text w-100">
                                         <h6 class="font-medium">Steve Jobs</h6>
@@ -435,7 +432,8 @@
                                 <h4 class="card-title">Temp Guide</h4>
                                 <div class="d-flex align-items-center flex-row mt-4">
                                     <div class="display-5 text-info"><i class="wi wi-day-showers"></i>
-                                        <span>73<sup>°</sup></span></div>
+                                        <span>73<sup>°</sup></span>
+                                    </div>
                                     <div class="ms-2">
                                         <h3 class="mb-0">Saturday</h3><small>Ahmedabad, India</small>
                                     </div>
