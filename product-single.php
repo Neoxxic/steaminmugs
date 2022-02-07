@@ -23,6 +23,9 @@ include_once "static/header.php"
 	<div class="container">
 		<div class="row">
 			<?php
+			if(isset($_SESSION['order_id'])){
+				$order_temp_id = $_SESSION['order_id'];
+			}
 			if (isset($_GET['product_id'])) {
 
 				$id = $_GET['product_id'];
@@ -39,6 +42,7 @@ include_once "static/header.php"
 					$current_category = $row['category_id'];
 					$featured = $row['featured'];
 					$active = $row['active'];
+
 				} else {
 					echo "<div class='error'>Product not Found</div>";
 				}
@@ -100,7 +104,10 @@ include_once "static/header.php"
 							</span>
 						</div>
 					</div>
-					<p><input type="submit" name="add-to-cart" class="btn btn-primary py-3 px-5" value="Add to cart"></input></p>
+					<p>
+						<input type="hidden" name="order_temp_id" value="<?php echo $order_temp_id;?>"></input>
+						<input type="submit" name="add-to-cart" class="btn btn-primary py-3 px-5" value="Add to cart"></input>
+					</p>
 					</from>
 			</div>
 		</div>
@@ -127,7 +134,7 @@ include_once "static/header.php"
 			if ($count3 > 0) {
 
 				while ($row3 = mysqli_fetch_assoc($res3)) {
-
+					$product_id = $row3['id'];
 					$title2 = $row3['title'];
 					$description2 = $row3['description'];
 					$price2 = $row3['price'];
@@ -159,10 +166,10 @@ include_once "static/header.php"
 									?>
 
 									<div class="text text-center pt-4">
-										<h3><a href="<?php echo $siteurl . 'product-single.php?product_id=' . $product_id ?>"><?php echo $title2; ?></a></h3>
+										<h3><a href="<?php echo $siteurl . 'product-single.php?product_id='. $product_id ?>"><?php echo $title2; ?></a></h3>
 										<p><?php echo $description2; ?></p>
 										<p class="price"><span><?php echo $price2; ?></span></p>
-										<p><a href="<?php echo $siteurl . 'product-single.php?product_id=' . $product_id ?>" class="btn btn-primary btn-outline-primary">Add to Cart</a></p>
+										<p><a href="<?php echo $siteurl . 'product-single.php?product_id='. $product_id ?>" class="btn btn-primary btn-outline-primary">Add to Cart</a></p>
 									</div>
 								</div>
 							</div>

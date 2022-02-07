@@ -68,7 +68,7 @@
                     ?>
 
                     <div class="text">
-                      <h3 class="heading"><a href="#"><?php echo $blog_title; ?></a></h3>
+                      <h3 class="heading"><a href="blog-single.php?blog_id=<?php echo $id;?>"><?php echo $blog_title; ?></a></h3>
                       <div class="meta">
                         <div><a href="#"><span class="icon-calendar"></span> <?php echo date("m/d/Y" . ' ' . "h:i a", strtotime($date_posted)) ?></a></div>
                         <div><a href="#"><span class="icon-person"></span> <?php echo $admin_name; ?></a></div>
@@ -119,7 +119,7 @@
           <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
           Copyright &copy;<script>
             document.write(new Date().getFullYear());
-          </script> All rights reserved</a>
+          </script> All rights reserved by Steamin'Mugs</a>
           <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
         </p>
       </div>

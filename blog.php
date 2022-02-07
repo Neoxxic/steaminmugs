@@ -22,6 +22,7 @@ include_once "static/header.php"
 <section class="ftco-section">
   <div class="container">
     <div class="row d-flex">
+      
       <?php
 
       $sql = "SELECT * FROM tbl_blog";
@@ -75,7 +76,7 @@ include_once "static/header.php"
                     <div><a href="#"><?php echo $admin_name;?></a></div>
                     <div><a href="#" class="meta-chat"><span class="icon-chat"></span> <?php echo $count3;?></a></div>
                   </div>
-                  <h3 class="heading mt-2"><a href="#"><?php echo $blog_title;?></a></h3>
+                  <h3 class="heading mt-2"><a href="blog-single.php?blog_id=<?php echo $id;?>"><?php echo $blog_title;?></a></h3>
                   <p><?php echo $content1?></p>
                 </div>
               </div>
@@ -90,6 +91,7 @@ include_once "static/header.php"
       ?>
   </div>
 </section>
+
 
 <?php
 include_once "static/footer.php"

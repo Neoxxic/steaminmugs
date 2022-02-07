@@ -43,8 +43,8 @@ function get_num_of_words($string)
 
 // ADD TO CART
 if (isset($_POST['add-to-cart'])) {
+    
     $id = $_POST['id'];
-    $temp_id = rand(0, 9999) * rand(0, 9999);
     $product = $_POST['product'];
     $product_img = $_POST['food_img'];
     $price = $_POST['price'];
@@ -58,6 +58,19 @@ if (isset($_POST['add-to-cart'])) {
     $phone = "None";
     $address = "None";
     $payment = "None";
+
+    if(isset($_SESSION['order_id'])){
+        $temp_id = $_SESSION['order_id'];
+    } else {   
+        $temp_id_rnd = rand(0, 9999) * rand(0, 9999);
+        $temp_id2 = define('temp_id', $temp_id_rnd);
+        if($temp_id_rnd == $temp_id2){
+            $_SESSION['order_id'] = $temp_id_rnd;
+            $temp_id = $temp_id_rnd;
+        }
+    }
+   
+    
 
     $sql4 = "INSERT INTO tbl_order SET
             temp_id = $temp_id,
@@ -138,7 +151,7 @@ if (isset($_POST['place-order'])) {
                 customer_email = '$email',
                 customer_address = '$address',
                 payment_method = '$payment'
-                WHERE id=$id";
+                WHERE temp_id=$temp_id";
 
     $res = mysqli_query($conn, $sql);
 

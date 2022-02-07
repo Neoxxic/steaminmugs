@@ -18,22 +18,22 @@
 	              </blockquote>
 	              <div class="author d-flex mt-4">
 	                <div class="image mr-3 align-self-center">
-	                  <img src="images/person_1.jpg" alt="">
+	                  <img src="images/person_4.jpg" alt="">
 	                </div>
-	                <div class="name align-self-center">Louise Kelly <span class="position">Illustrator Designer</span></div>
+	                <div class="name align-self-center">Louise Kelly <span class="position">Graphic Designer</span></div>
 	              </div>
 	          </div>
 	        </div>
 	        <div class="col-lg align-self-sm-end">
 	          <div class="testimony overlay">
 	             <blockquote>
-	                <p>This is without a doubt the greatest coffee I've ever drank.</p>
+	                <p>This is a thing without a doubt, the greatest coffee I've ever drank.</p>
 	              </blockquote>
 	              <div class="author d-flex mt-4">
 	                <div class="image mr-3 align-self-center">
 	                  <img src="images/person_2.jpg" alt="">
 	                </div>
-	                <div class="name align-self-center">Justine Mark <span class="position">Illustrator Designer</span></div>
+	                <div class="name align-self-center">Justine Mark <span class="position">Businessman</span></div>
 	              </div>
 	          </div>
 	        </div>
@@ -46,7 +46,7 @@
 	                <div class="image mr-3 align-self-center">
 	                  <img src="images/person_3.jpg" alt="">
 	                </div>
-	                <div class="name align-self-center">Anjanete Allado <span class="position">Illustrator Designer</span></div>
+	                <div class="name align-self-center">Anjanete Allado <span class="position">Singer</span></div>
 	              </div>
 	          </div>
 	        </div>
@@ -59,7 +59,7 @@
 	                <div class="image mr-3 align-self-center">
 	                  <img src="images/person_2.jpg" alt="">
 	                </div>
-	                <div class="name align-self-center">Christoper Martin <span class="position">Illustrator Designer</span></div>
+	                <div class="name align-self-center">Christoper Martin <span class="position">Artist</span></div>
 	              </div>
 	          </div>
 	        </div>
@@ -72,7 +72,7 @@
 	              <div class="image mr-3 align-self-center">
 	                <img src="images/person_3.jpg" alt="">
 	              </div>
-	              <div class="name align-self-center">Shin Park <span class="position">Illustrator Designer</span></div>
+	              <div class="name align-self-center">Shin Park <span class="position">Fashion Designer</span></div>
 	            </div>
 	          </div>
 	        </div>
